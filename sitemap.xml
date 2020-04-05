@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zqzhao.cn/2018/03/13/news-clustering/</loc>
+    
+    <lastmod>2020-04-05T09:14:15.721Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zqzhao.cn/2020/03/18/SVD/</loc>
     
     <lastmod>2020-04-05T08:39:23.078Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://zqzhao.cn/2018/01/25/simple-clustering/</loc>
     
     <lastmod>2020-04-05T02:57:13.105Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2018/03/13/news-clustering/</loc>
-    
-    <lastmod>2020-04-05T02:56:20.800Z</lastmod>
     
   </url>
   
