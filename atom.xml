@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zqzhao.cn/"/>
-  <updated>2020-04-05T03:52:01.823Z</updated>
+  <updated>2020-04-05T08:34:58.359Z</updated>
   <id>https://zqzhao.cn/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Construct</title>
+    <title>MISQ Research Curation on IS Use</title>
+    <link href="https://zqzhao.cn/2020/04/05/Burton-summary/"/>
+    <id>https://zqzhao.cn/2020/04/05/Burton-summary/</id>
+    <published>2020-04-05T08:28:07.000Z</published>
+    <updated>2020-04-05T08:34:58.359Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>Burton-Jones, A., Stein, M., Mishra, A. “IS Use,” in MIS Quarterly Research Curations, Ashley Bush and Arun Rai, Eds., <a href="http://misq.org/research-curations" target="_blank" rel="noopener">http://misq.org/research-curations</a>,  December 1, 2017.MIS Quarterly Articles on IS Use</p></blockquote><p><a href="/files/Burton2017.pdf">Files here.</a></p><p>This article is primarily an overview of the research content and the research methods used in IS use related article.</p><p>Now, I’ll briefly summarize the article and give my comments.</p><h2 id="Focus-of-the-Research-Curation"><a href="#Focus-of-the-Research-Curation" class="headerlink" title="Focus of the Research Curation"></a>Focus of the Research Curation</h2><p>This part introduce how they retrieve the previous article and determine the rim of dataset, actually “Paper Set” here. The standards is full of manipulation.</p><p>The main procedure is shown as follow:</p><ol><li>Segment all the article based on the publish year: 1977-1999, 2000-</li><li>Determine the search term also based on the publish year</li><li>Exclude articles focused PURELY on users’ intentions, attitudes, behaviors etc. </li><li>Exclude articles focused on misuse, abuse and addiction.</li></ol><p>The author also mention that they include or exclude an article based on their “collective judgement”.</p><h2 id="Progression-of-Research-in-MISQ"><a href="#Progression-of-Research-in-MISQ" class="headerlink" title="Progression of Research in MISQ"></a>Progression of Research in MISQ</h2><p>This part summarize the revolutionary change and evolutionary change in IS use. </p><p>One steady topic is the importance and the complexity of the IS use. This theme gradually develops since 1977 and still thrive nowadays. However, the sophistication in term measurement and theoretical basis allow researchers to discuss an old terminology in new context. (The article refer to which as the theoretical and empirical research.) </p><blockquote><p>“They can account for it with theories and methods that are sensitive to longitudinal, multilevel, and multifactorial contexts rather than reducing the reality of IS use into cross-sectional, single-level, and single-theory thinking.”</p></blockquote><p>About 2000, a novel branch of IS acceptance appears, which is due to the broken burble economy of Internet. I think it also devotes to the separation of the publish period.</p><h2 id="Thematic-Advances-in-Knowledge"><a href="#Thematic-Advances-in-Knowledge" class="headerlink" title="Thematic Advances in Knowledge"></a>Thematic Advances in Knowledge</h2><p>Four major thematic advances are mentioned here.</p><ol><li>Application, refinement, and integrations of various social psychological explanations of It acceptance.</li><li>Development of theories to account for the dynamics of use.</li><li>Richer measurement and methodological approaches</li><li>Continuing expansion of the broader network of constructs.</li></ol><h2 id="My-Comments"><a href="#My-Comments" class="headerlink" title="My Comments"></a>My Comments</h2><p>When looking into the appendix, we find out that in early age of IT use, most of researchers use conceptual framework or qualitative methods while in later period they turn to quantitative methods.</p><p>My question is :</p><ol><li>Could the quantitative methods help to clarify or refine the concepts? If so, how? Quantitative methods rely on theoretical basis to consolidate its validity, how can they help to refine the concept?</li><li>Will the concept or the definition of IT use augment in future? If so, we still need to focus on qualitative methods.</li><li>Mixed methods research gains its popularity in recent years. What is the exact definition mixed methods research? A SEM combines both qualitative data and quantitative data? Or a three-stage research including qualitative case helps refining the framework and a quantitative method validate the hypothesis? </li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;Burton-Jones, A., Stein, M., Mishra, A. “IS Use,” in MIS Quarterly Research Curations, Ashley Bush and Arun Rai, Eds., &lt;a hr
+      
+    
+    </summary>
+    
+    
+      <category term="Theory" scheme="https://zqzhao.cn/categories/Theory/"/>
+    
+    
+      <category term="MIS_thinking" scheme="https://zqzhao.cn/tags/MIS-thinking/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Formative Construct and Reflective Construct</title>
     <link href="https://zqzhao.cn/2020/04/05/construct/"/>
     <id>https://zqzhao.cn/2020/04/05/construct/</id>
     <published>2020-04-05T03:41:10.000Z</published>
-    <updated>2020-04-05T03:52:01.823Z</updated>
+    <updated>2020-04-05T04:01:51.953Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Formative-Construct-and-Reflective-Construct"><a href="#Formative-Construct-and-Reflective-Construct" class="headerlink" title="Formative Construct and Reflective Construct"></a>Formative Construct and Reflective Construct</h1><p>Reading Materials:</p><ul><li>MISQ  <ul><li><a href="/files/1MacKenzie.pdf">1MacKenzie.pdf</a></li><li><a href="/files/2REVISITING_BIAS.pdf">2REVISITING_BIAS</a></li><li><a href="/files/3CRITICAL_IMPORTANCE.pdf">3CRITICAL_IMPORTANCE</a></li><li><a href="/files/4NEGATIVE_CONSEQUENCES.pdf">4NEGATIVE_CONSEQUENCES</a></li><li><a href="/files/5PLS-SEM.pdf">5PLS-SEM</a></li></ul></li><li>Detmar Straub<ul><li><a href="/files/UVAformative.ppt">Speech notes</a></li></ul></li></ul>]]></content>
     
@@ -39,6 +66,40 @@
     
     
       <category term="Theorical_Basis" scheme="https://zqzhao.cn/tags/Theorical-Basis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GMM</title>
+    <link href="https://zqzhao.cn/2020/03/31/GMM/"/>
+    <id>https://zqzhao.cn/2020/03/31/GMM/</id>
+    <published>2020-03-31T04:02:31.000Z</published>
+    <updated>2020-04-05T08:39:14.272Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+      <category term="CS_Math" scheme="https://zqzhao.cn/tags/CS-Math/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SVD</title>
+    <link href="https://zqzhao.cn/2020/03/18/SVD/"/>
+    <id>https://zqzhao.cn/2020/03/18/SVD/</id>
+    <published>2020-03-18T10:05:32.000Z</published>
+    <updated>2020-04-05T08:39:23.078Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+      <category term="CS_Math" scheme="https://zqzhao.cn/tags/CS-Math/"/>
     
   </entry>
   
@@ -100,17 +161,16 @@
     <link href="https://zqzhao.cn/2017/11/16/python-setting/"/>
     <id>https://zqzhao.cn/2017/11/16/python-setting/</id>
     <published>2017-11-16T08:13:09.000Z</published>
-    <updated>2020-04-05T02:57:11.158Z</updated>
+    <updated>2020-04-05T04:10:19.867Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><p>install <strong>Homebrew</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure><p>Jump if already installed. It’s necessary to update your homebrew to the latest version.</p></li><li><p>Use Homebrew install <strong>Python3 &amp; pip3</strong> (pip is a package management tool for Python), automatically latest version, you may choose another version.  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install python3</span><br></pre></td></tr></table></figure><p>We use pip3 because we want to use Python 3.x.x. </p></li><li><p>If you need pip simply, try</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br></pre></td></tr></table></figure><p>install pip need administrator role</p></li><li><p>Check the version  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$python --version</span><br><span class="line">$python3 --version</span><br><span class="line">$pip --version</span><br><span class="line">$pip3 --version</span><br></pre></td></tr></table></figure></li><li><p>Install <strong>[PyCharm</strong>](<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/</a>). I recommend community edition. If you want the professional edition, there is a <a href="http://xidea.online" target="_blank" rel="noopener">Free JetBrains Products License Server</a>.</p></li><li><p>Install additional packages:<br> For example, <strong>bs4</strong> (BeautifulSoup 4):</p><ul><li><p>PyCharm offer you an inner package management tool:<br>  Preferences –&gt;  Project –&gt; Project Interpreter</p><ul><li>Click “+” to install packages you need.</li><li>Usually there are some errors, follow its introduction and try again.</li><li>At most cases, error occurs when you revoke the administrator role.<br>  So… <code>sudo</code>please</li></ul></li><li><p>Another way is to install in the terminal:<br>  <code>$ pip3 install bs4</code></p><ul><li>if any problems, follow the introduction and try again.</li><li>Usually you need to upgrade your “pip” “homebrew” “python” or other relative package.</li></ul></li></ul></li></ol>]]></content>
+    <content type="html"><![CDATA[<ol><li>install <strong>Homebrew</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;usr&#x2F;bin&#x2F;ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br></pre></td></tr></table></figure>Jump if already installed. It’s necessary to update your homebrew to the latest version.</li></ol><ul><li>2020-04-05 Update: If you get blocked, try to fix the problem by <a href="https://www.jianshu.com/p/67db55780450" target="_blank" rel="noopener">this</a>.</li></ul><ol start="2"><li><p>Use Homebrew install <strong>Python3 &amp; pip3</strong> (pip is a package management tool for Python), automatically latest version, you may choose another version.  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ brew install python3</span><br></pre></td></tr></table></figure><p>We use pip3 because we want to use Python 3.x.x. </p></li><li><p>If you need pip simply, try</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo easy_install pip</span><br></pre></td></tr></table></figure><p>install pip need administrator role</p></li><li><p>Check the version  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$python --version</span><br><span class="line">$python3 --version</span><br><span class="line">$pip --version</span><br><span class="line">$pip3 --version</span><br></pre></td></tr></table></figure></li><li><p>Install <strong>[PyCharm</strong>](<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener">https://www.jetbrains.com/pycharm/</a>). I recommend community edition. If you want the professional edition, there is a <a href="http://xidea.online" target="_blank" rel="noopener">Free JetBrains Products License Server</a>.</p></li><li><p>Install additional packages:<br> For example, <strong>bs4</strong> (BeautifulSoup 4):</p><ul><li><p>PyCharm offer you an inner package management tool:<br>  Preferences –&gt;  Project –&gt; Project Interpreter</p><ul><li>Click “+” to install packages you need.</li><li>Usually there are some errors, follow its introduction and try again.</li><li>At most cases, error occurs when you revoke the administrator role.<br>  So… <code>sudo</code>please</li></ul></li><li><p>Another way is to install in the terminal:<br>  <code>$ pip3 install bs4</code></p><ul><li>if any problems, follow the introduction and try again.</li><li>Usually you need to upgrade your “pip” “homebrew” “python” or other relative package.</li></ul></li></ul></li></ol>]]></content>
     
     <summary type="html">
     
       
       
         &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;install &lt;strong&gt;Homebrew&lt;/strong&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/s
+&lt;li&gt;install &lt;strong&gt;Homebrew&lt;/strong&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;
       
     
     </summary>
