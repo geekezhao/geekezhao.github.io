@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zqzhao.cn/"/>
-  <updated>2020-04-29T08:53:45.587Z</updated>
+  <updated>2020-08-07T15:52:37.369Z</updated>
   <id>https://zqzhao.cn/</id>
   
   <author>
@@ -15,6 +15,61 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Article_Module_MIS_INTRO</title>
+    <link href="https://zqzhao.cn/2020/08/07/module-intro/"/>
+    <id>https://zqzhao.cn/2020/08/07/module-intro/</id>
+    <published>2020-08-07T14:30:12.000Z</published>
+    <updated>2020-08-07T15:52:37.369Z</updated>
+    
+    <content type="html"><![CDATA[<p>In this part, I will conduct a module of introduction in order to avail future researches. Based on the favor of different journals, I will list the template grouped by the journals. Mainly there are three journals which are MISQ, ISR and MS. However, there are also other articles with a graceful written style.</p><h2 id="引入-过往不足"><a href="#引入-过往不足" class="headerlink" title="引入-过往不足"></a>引入-过往不足</h2><h3 id="ISR"><a href="#ISR" class="headerlink" title="ISR"></a>ISR</h3><ol><li>Engineers and industry experts in these sectors have provided anecdotal evidence of a software-biased shift in the trajectory of innovation, but this evidence has generally rested on a relatively small number of possibly unrepresentative firms and products. </li><li></li></ol><h3 id="MS"><a href="#MS" class="headerlink" title="MS"></a>MS</h3><h3 id="MISQ"><a href="#MISQ" class="headerlink" title="MISQ"></a>MISQ</h3><h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><h2 id="引入-重要现实意义"><a href="#引入-重要现实意义" class="headerlink" title="引入-重要现实意义"></a>引入-重要现实意义</h2><h3 id="ISR-1"><a href="#ISR-1" class="headerlink" title="ISR"></a>ISR</h3><h3 id="MS-1"><a href="#MS-1" class="headerlink" title="MS"></a>MS</h3><h3 id="MISQ-1"><a href="#MISQ-1" class="headerlink" title="MISQ"></a>MISQ</h3><h3 id="Others-1"><a href="#Others-1" class="headerlink" title="Others"></a>Others</h3><h2 id="对自己的全文做一个简单总结"><a href="#对自己的全文做一个简单总结" class="headerlink" title="对自己的全文做一个简单总结"></a>对自己的全文做一个简单总结</h2><h3 id="ISR-2"><a href="#ISR-2" class="headerlink" title="ISR"></a>ISR</h3><ol><li>Using much more comprehensive patent and patent citation data, we present new statistical evidence showing that this software-biased shift is persistent, systematic, and increasingly pervasive. We also point to other indicators suggesting that this shift extends far beyond the boundaries of our four target industries.</li></ol><h3 id="MS-2"><a href="#MS-2" class="headerlink" title="MS"></a>MS</h3><h3 id="MISQ-2"><a href="#MISQ-2" class="headerlink" title="MISQ"></a>MISQ</h3><h3 id="Others-2"><a href="#Others-2" class="headerlink" title="Others"></a>Others</h3><h2 id="文章结构"><a href="#文章结构" class="headerlink" title="文章结构"></a>文章结构</h2><h3 id="ISR-3"><a href="#ISR-3" class="headerlink" title="ISR"></a>ISR</h3><p>This paper is structured as follows. Section 2 reviews research from the engineering and management literatures that points to a significant increase in the importance of software as an enabler of innovation in four “traditional” manufacturing sectors. We interpret these developments through the lens of the economic literature on general purpose technologies, and identify dimensions of technological change that link the observations of different industry experts to a common underlying cause. While suggestive, earlier research on this shift tends to be somewhat anecdotal, rely- ing heavily on the experience of a small number of firms and a highly selected sample of recent product development efforts. Section 3 presents new statistical evidence based on patent citation data that suggests the software-biased shift in the direction of technological change suggested by the engineering and manage- rial literatures is real, broad-based, and economically and statistically significant. Section 4 empirically examines the implications of this shift in software intensity for the innovation performance of firms in the four manufacturing sectors that are the focus of our study. Section 5 concludes with a summary of key results and avenues for future research.</p><h3 id="MS-3"><a href="#MS-3" class="headerlink" title="MS"></a>MS</h3><h3 id="MISQ-3"><a href="#MISQ-3" class="headerlink" title="MISQ"></a>MISQ</h3><h3 id="Others-3"><a href="#Others-3" class="headerlink" title="Others"></a>Others</h3>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;In this part, I will conduct a module of introduction in order to avail future researches. Based on the favor of different journals, I wi
+      
+    
+    </summary>
+    
+    
+      <category term="Theory" scheme="https://zqzhao.cn/categories/Theory/"/>
+    
+    
+      <category term="Article_Module_MIS" scheme="https://zqzhao.cn/tags/Article-Module-MIS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Social Similarity</title>
+    <link href="https://zqzhao.cn/2020/07/09/social-similarity/"/>
+    <id>https://zqzhao.cn/2020/07/09/social-similarity/</id>
+    <published>2020-07-09T10:58:02.000Z</published>
+    <updated>2020-07-09T16:13:02.416Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>本文考虑社交网络、社会关系间的相似性、距离度量，后续或有补充。</p></blockquote><h2 id="话语相似性"><a href="#话语相似性" class="headerlink" title="话语相似性"></a>话语相似性</h2><blockquote><p>Top management team social interaction and conservative reporting decision: A language style matching approach. Decision Support Systems.</p></blockquote><p>LSM（Language Similarity Measure）用于衡量CFO和CEO的话语相似度。文章用meeting record作为数据来源，删掉部分行业以及资产不良的企业。</p><script type="math/tex; mode=display">FWI_{k,i}, k=1, ..., 9. \tag{1}</script><script type="math/tex; mode=display">LSM_{k,i,j} = 1-|FWI_{k,i} - FWI_{k,j}| / |FWI_{k,i} + FWI_{k,j}+0.0001|,k=1, ..., 9. \tag{2}</script><script type="math/tex; mode=display">LSM_{i,j} = E[\sum_{k=1}^9 LSM_{k,i,j}]\tag{3}</script><p>其中，公式（1）衡量第i个总裁在第k类词汇中的词汇强度（Function of Word Intensity），公式（2）衡量第i个和第j个总裁在第k类词汇上的LSM，公式（3）衡量第i个和第j个总裁之间的总话语相似性。</p><h1 id="未完待续。。。"><a href="#未完待续。。。" class="headerlink" title="未完待续。。。"></a>未完待续。。。</h1>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;本文考虑社交网络、社会关系间的相似性、距离度量，后续或有补充。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;话语相似性&quot;&gt;&lt;a href=&quot;#话语相似性&quot; class=&quot;headerlink&quot; title=&quot;话语相似性&quot;&gt;&lt;/a&gt;话语相似性
+      
+    
+    </summary>
+    
+    
+      <category term="Theory" scheme="https://zqzhao.cn/categories/Theory/"/>
+    
+    
+      <category term="Theorical_Basis" scheme="https://zqzhao.cn/tags/Theorical-Basis/"/>
+    
+  </entry>
   
   <entry>
     <title>Content Analysis Methods</title>
