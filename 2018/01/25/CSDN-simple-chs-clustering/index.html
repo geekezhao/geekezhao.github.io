@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Chinese Characters Clustering | Hexo</title>
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chinese Characters Clustering">
+<meta property="og:url" content="https://zqzhao.cn/2018/01/25/CSDN-simple-chs-clustering/index.html">
+<meta property="og:site_name" content="Geeke&#39;s Blog">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110210">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-01-25T08:47:26.000Z">
+<meta property="article:modified_time" content="2020-04-05T02:57:13.105Z">
+<meta property="article:author" content="Geek ZHAO">
+<meta property="article:tag" content="Clustering">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zqzhao.cn/2018/01/25/CSDN-simple-chs-clustering/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Geeke&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/geekezhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/Avatar2.JPG" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ziqi ZHAO</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Naive student.</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Hello!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Theory/">Theory</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Article-Template-MIS/" rel="tag">Article_Template_MIS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS-Math/" rel="tag">CS_Math</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clustering/" rel="tag">Clustering</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIS-thinking/" rel="tag">MIS_thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theorical-Basis/" rel="tag">Theorical_Basis</a><span class="tag-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Article-Template-MIS/" style="font-size: 13.5px;">Article_Template_MIS</a> <a href="/tags/CS-Math/" style="font-size: 13.25px;">CS_Math</a> <a href="/tags/Clustering/" style="font-size: 13.75px;">Clustering</a> <a href="/tags/MIS-thinking/" style="font-size: 13px;">MIS_thinking</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Theorical-Basis/" style="font-size: 14px;">Theorical_Basis</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-discussion/" class="title">Article Template of MIS - Discussion</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T14:02:33.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-origin/" class="title">Article Template of MIS - Origin</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T11:51:53.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/07/module-intro/" class="title">Article Template of MIS - Introduction</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-07T14:30:12.000Z" itemprop="datePublished">2020-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/09/Seminar-social-similarity/" class="title">Social Similarity</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-09T10:58:02.000Z" itemprop="datePublished">2020-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/09/Seminar-WhatTheoryIsNot/" class="title">Seminar-WhatTheoryIsNot</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-09T11:40:42.000Z" itemprop="datePublished">2020-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CSDN-simple-chs-clustering" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Chinese Characters Clustering
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2018/01/25/CSDN-simple-chs-clustering/" class="article-date">
+	  <time datetime="2018-01-25T08:47:26.000Z" itemprop="datePublished">2018-01-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Tech/">Tech</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Clustering/" rel="tag">Clustering</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2018/01/25/CSDN-simple-chs-clustering/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.3k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 7(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">__author__ &#x3D; &#39;Zhao&#39;</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">import operator</span><br><span class="line"></span><br><span class="line">blank &#x3D; [chr(183)]</span><br><span class="line">tabs &#x3D; [&#39;&#39;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def tree(lst):</span><br><span class="line">    l &#x3D; len(lst)</span><br><span class="line">    if l &#x3D;&#x3D; 0:</span><br><span class="line">        print(&#39;─&#39; * 3)</span><br><span class="line">    else:</span><br><span class="line">        for i, j in enumerate(lst):</span><br><span class="line">            if i !&#x3D; 0: print(tabs[0], end&#x3D;&#39;&#39;)</span><br><span class="line">            if l &#x3D;&#x3D; 1:</span><br><span class="line">                s &#x3D; &#39;─&#39; * 3</span><br><span class="line">            elif i &#x3D;&#x3D; 0:</span><br><span class="line">                s &#x3D; &#39;┬&#39; + &#39;─&#39; * 2</span><br><span class="line">            elif i + 1 &#x3D;&#x3D; l:</span><br><span class="line">                s &#x3D; &#39;└&#39; + &#39;─&#39; * 2</span><br><span class="line">            else:</span><br><span class="line">                s &#x3D; &#39;├&#39; + &#39;─&#39; * 2</span><br><span class="line">            print(s, end&#x3D;&#39;&#39;)</span><br><span class="line">            if isinstance(j, list) or isinstance(j, tuple):</span><br><span class="line">                if i + 1 &#x3D;&#x3D; l:</span><br><span class="line">                    tabs[0] +&#x3D; blank[0] * 3</span><br><span class="line">                else:</span><br><span class="line">                    tabs[0] +&#x3D; &#39;│&#39; + blank[0] * 2</span><br><span class="line">                tree(j)</span><br><span class="line">            else:</span><br><span class="line">                print(&quot; &quot;, j)</span><br><span class="line">    tabs[0] &#x3D; tabs[0][:-3]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def judge_element_delete(list_input, centroid, group, match_num):</span><br><span class="line">    for list_element in list_input:</span><br><span class="line">        if isinstance(list_element, list):</span><br><span class="line">            for element in list_element:</span><br><span class="line">                if element &#x3D;&#x3D; match_num:</span><br><span class="line">                    del centroid[list_input.index(list_element)]</span><br><span class="line">                    del group[list_input.index(list_element)]</span><br><span class="line">        else:</span><br><span class="line">            if list_element &#x3D;&#x3D; match_num:</span><br><span class="line">                del centroid[list_input.index(list_element)]</span><br><span class="line">                del group[list_input.index(list_element)]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># --------------- in this part we save the list as list ---------------</span><br><span class="line">path &#x3D; &#39;&#x2F;Users&#x2F;apple&#x2F;desktop&#x2F;&#39;</span><br><span class="line">fp &#x3D; open(path + &#39;list.txt&#39;)</span><br><span class="line">ori &#x3D; fp.readlines()</span><br><span class="line"># ori is the list with out any operation</span><br><span class="line"></span><br><span class="line">copy &#x3D; []</span><br><span class="line">for x in ori:</span><br><span class="line">    x &#x3D; re.sub(r&#39;\n&#39;, &#39;&#39;, x)</span><br><span class="line">    copy.append(x)</span><br><span class="line"># in this part we change the format in a into standard format and save as copy</span><br><span class="line"></span><br><span class="line">fp.close()</span><br><span class="line"># we close the file, then we can run the list totally in this program</span><br><span class="line"></span><br><span class="line">copy.sort()</span><br><span class="line"></span><br><span class="line"># --------------- this part end ---------------</span><br><span class="line"></span><br><span class="line"># in this part we know the average length in this list is 2, thus we set step as 5.</span><br><span class="line"># In that case, we can contain at least one word.</span><br><span class="line"># totally, there are 56064 words in this list and only 56 is longer than 5.</span><br><span class="line"># In that case, 5 can be a reasonable step for this program.</span><br><span class="line"></span><br><span class="line"># sum &#x3D; 0</span><br><span class="line"># num &#x3D; 0</span><br><span class="line"># for x in copy:</span><br><span class="line">#     sum +&#x3D; len(x)</span><br><span class="line">#     num +&#x3D; 1</span><br><span class="line"># average &#x3D; (int)(sum&#x2F;num)</span><br><span class="line"># print(average, &#39; &#39;, num);</span><br><span class="line"></span><br><span class="line"># max_lenth &#x3D; 0</span><br><span class="line"># for x in copy:</span><br><span class="line">#     if max_lenth &lt; len(x):</span><br><span class="line">#         max_lenth &#x3D; len(x)</span><br><span class="line">#</span><br><span class="line"># print(max_lenth)</span><br><span class="line"></span><br><span class="line"># number &#x3D; 0</span><br><span class="line"># for x in copy:</span><br><span class="line">#     if len(x) &gt; 5:</span><br><span class="line">#         number +&#x3D; 1</span><br><span class="line">#</span><br><span class="line"># print(number)</span><br><span class="line"></span><br><span class="line"># --------------- the upper is the calculation in the preparation ---------------</span><br><span class="line"></span><br><span class="line">str_input &#x3D; input(&quot;请输入一个段落：\n&quot;)</span><br><span class="line"></span><br><span class="line">str_input &#x3D; re.sub(r&#39;,&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;，&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;\.&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;。&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;——&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;……&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;！&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;!&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;\?&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;？&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;;&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39;；&#39;, &quot;&quot;, str_input)</span><br><span class="line">str_input &#x3D; re.sub(r&#39; &#39;, &quot;&quot;, str_input)</span><br><span class="line"></span><br><span class="line"># change all the punctuation as blank, however, we may split falsely.</span><br><span class="line"># Words get around, the step can also split at wrong place, so, I do not fix this mistake.</span><br><span class="line"></span><br><span class="line">str_head &#x3D; 0</span><br><span class="line">str_tail &#x3D; len(str_input)</span><br><span class="line">ptr &#x3D; 5</span><br><span class="line">temp &#x3D; 0</span><br><span class="line">step &#x3D; 5</span><br><span class="line"></span><br><span class="line">result &#x3D; []</span><br><span class="line">ch_index &#x3D; []</span><br><span class="line"></span><br><span class="line">while temp &lt; str_tail-1:</span><br><span class="line">    flag &#x3D; 0</span><br><span class="line">    ptr &#x3D; 5</span><br><span class="line">    while flag !&#x3D; 1:</span><br><span class="line">        in_put &#x3D; str_input[temp:temp + ptr]</span><br><span class="line"></span><br><span class="line">        tail &#x3D; len(copy)</span><br><span class="line">        head &#x3D; 0</span><br><span class="line">        half &#x3D; int((tail + head) &#x2F; 2)</span><br><span class="line"></span><br><span class="line">        while tail !&#x3D; half and head !&#x3D; half:</span><br><span class="line">            if operator.lt(copy[half], in_put):</span><br><span class="line">                # 如果字符组的一半比input小</span><br><span class="line">                head &#x3D; half</span><br><span class="line">                half &#x3D; int((tail + head) &#x2F; 2)</span><br><span class="line"></span><br><span class="line">            elif operator.gt(copy[half], in_put):</span><br><span class="line">                # 如果字符组的一半比input大</span><br><span class="line">                tail &#x3D; half</span><br><span class="line">                half &#x3D; int((tail + head) &#x2F; 2)</span><br><span class="line"></span><br><span class="line">            else:</span><br><span class="line">                # print(in_put, end&#x3D;&#39;&#x2F;&#39;)</span><br><span class="line">                result.append(in_put)</span><br><span class="line">                ch_index.append(half)</span><br><span class="line">                flag &#x3D; 1</span><br><span class="line">                temp +&#x3D; len(in_put)</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">        if ptr &#x3D;&#x3D; 0 and temp &lt;&#x3D; len(str_input)-1:</span><br><span class="line">            # print(str_input[temp], end&#x3D;&#39;&#x2F;&#39;)</span><br><span class="line">            result.append(str_input[temp])</span><br><span class="line">            ch_index.append(-1)</span><br><span class="line">            temp +&#x3D; 1</span><br><span class="line">            flag &#x3D; 1</span><br><span class="line"></span><br><span class="line">        if flag &#x3D;&#x3D; 0:</span><br><span class="line">            ptr -&#x3D; 1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">group &#x3D; result</span><br><span class="line">centroid &#x3D; ch_index</span><br><span class="line"></span><br><span class="line"># group &#x3D; input(&quot;Please input some numbers spit as blank:\n&quot;).split(&quot; &quot;)</span><br><span class="line"># group_num &#x3D; len(group)</span><br><span class="line"></span><br><span class="line"># for element in group:</span><br><span class="line">#     centroid.append(int(element))</span><br><span class="line"></span><br><span class="line">precision &#x3D; 0</span><br><span class="line">for element in group:</span><br><span class="line">    precision &#x3D; len(element) if len(element) &gt; precision else precision</span><br><span class="line"></span><br><span class="line">group_num &#x3D; len(group)</span><br><span class="line"></span><br><span class="line">while group_num !&#x3D; 2:</span><br><span class="line">    # print(&quot;the numbers of groups now is &quot;, group_num, &quot;\n&quot;)</span><br><span class="line"></span><br><span class="line">    matrix &#x3D; [[] for i in range(group_num)]</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        for j in range(group_num):</span><br><span class="line">            distance &#x3D; abs(int(centroid[i]) - int(centroid[j]))</span><br><span class="line">            matrix[i].append(distance)</span><br><span class="line"></span><br><span class="line">    # --------------- matrix ---------------</span><br><span class="line"></span><br><span class="line">    # print(&quot;distance matrix :&quot;)</span><br><span class="line">    # for i in range(group_num):</span><br><span class="line">    # print(matrix[i])</span><br><span class="line">    # matrix contains the distance between every two elements</span><br><span class="line"></span><br><span class="line">    # print(&quot;------------&quot;)</span><br><span class="line"></span><br><span class="line">    max_in_matrix &#x3D; 0</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        for j in range(group_num):</span><br><span class="line">            max_in_matrix &#x3D; max_in_matrix if max_in_matrix &gt; matrix[i][j] else matrix[i][j]</span><br><span class="line"></span><br><span class="line">    # print(max_in_matrix)</span><br><span class="line">    # if max_in_matrix &#x3D;&#x3D; 0:</span><br><span class="line">    #     break</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        for j in range(group_num):</span><br><span class="line">            matrix[i][j] &#x2F;&#x3D; max_in_matrix</span><br><span class="line">            matrix[i][j] &#x3D; round(1 - matrix[i][j], precision) if round(1 - matrix[i][j], precision) !&#x3D; 1 else 0</span><br><span class="line"></span><br><span class="line">    # print(&quot;standard matrix :&quot;)</span><br><span class="line">    # for i in range(group_num):</span><br><span class="line">    #     print(matrix[i])</span><br><span class="line"></span><br><span class="line">    # print(&quot;------------&quot;)</span><br><span class="line">    # standard the matrix</span><br><span class="line"></span><br><span class="line">    similarity &#x3D; 0</span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        for j in range(group_num):</span><br><span class="line">            similarity &#x3D; similarity if similarity &gt; matrix[i][j] else matrix[i][j]</span><br><span class="line"></span><br><span class="line">    # print(&quot;max similarity in the matrix: &quot;, max_in_matrix, &quot;\n&quot;)</span><br><span class="line">    # --------------- matrix ---------------</span><br><span class="line"></span><br><span class="line">    # find the max similarity in this matrix</span><br><span class="line"></span><br><span class="line">    temp_class &#x3D; []</span><br><span class="line"></span><br><span class="line">    index &#x3D; []</span><br><span class="line">    flag &#x3D; 0</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        for j in range(group_num):</span><br><span class="line">            if matrix[i][j] &#x3D;&#x3D; similarity:</span><br><span class="line">                index.append(i)</span><br><span class="line">                index.append(j)</span><br><span class="line">                flag &#x3D; 1</span><br><span class="line"></span><br><span class="line">                temp_class.append(group[i])</span><br><span class="line">                temp_class.append(group[j])</span><br><span class="line"></span><br><span class="line">            if flag &#x3D;&#x3D; 1:</span><br><span class="line">                break</span><br><span class="line">        if flag &#x3D;&#x3D; 1:</span><br><span class="line">            break</span><br><span class="line">    # find the first center index of new group</span><br><span class="line"></span><br><span class="line">    group_num &#x3D; len(group)</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        if matrix[index[0]][i] &#x3D;&#x3D; similarity and i !&#x3D; index[1]:</span><br><span class="line">            temp_class.append(group[i])</span><br><span class="line">            index.append(i)</span><br><span class="line"></span><br><span class="line">    for i in range(group_num):</span><br><span class="line">        if matrix[index[1]][i] &#x3D;&#x3D; similarity and i !&#x3D; index[0]:</span><br><span class="line">            temp_class.append(group[i])</span><br><span class="line">            index.append(i)</span><br><span class="line"></span><br><span class="line">    new_centroid &#x3D; 0</span><br><span class="line">    for element in index:</span><br><span class="line">        new_centroid +&#x3D; centroid[element]</span><br><span class="line"></span><br><span class="line">    new_centroid &#x2F;&#x3D; len(index)</span><br><span class="line"></span><br><span class="line">    for element in index:</span><br><span class="line">        group[element] &#x3D; &#39;substitute&#39;</span><br><span class="line">        centroid[element] &#x3D; &#39;substitute&#39;</span><br><span class="line"></span><br><span class="line">    lenth &#x3D; len(group)</span><br><span class="line">    temp_flag &#x3D; 0</span><br><span class="line">    while temp_flag !&#x3D; 1:</span><br><span class="line">        temp_flag &#x3D; 1</span><br><span class="line">        for i in range(0, lenth):</span><br><span class="line">            if group[i] &#x3D;&#x3D; &#39;substitute&#39;:</span><br><span class="line">                del group[i]</span><br><span class="line">                lenth &#x3D; len(group)</span><br><span class="line">                temp_flag &#x3D; 0</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">    lenth &#x3D; len(centroid)</span><br><span class="line"></span><br><span class="line">    temp_flag &#x3D; 0</span><br><span class="line">    while temp_flag !&#x3D; 1:</span><br><span class="line">        temp_flag &#x3D; 1</span><br><span class="line">        for i in range(0, lenth):</span><br><span class="line">            if centroid[i] &#x3D;&#x3D; &#39;substitute&#39;:</span><br><span class="line">                del centroid[i]</span><br><span class="line">                lenth &#x3D; len(centroid)</span><br><span class="line">                temp_flag &#x3D; 0</span><br><span class="line">                break</span><br><span class="line"></span><br><span class="line">    group.append(temp_class)</span><br><span class="line">    centroid.append(new_centroid)</span><br><span class="line">    group_num &#x3D; len(group)</span><br><span class="line"></span><br><span class="line">print(group)</span><br><span class="line">tree(group)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zqzhao.cn/2018/01/25/CSDN-simple-chs-clustering/" title="Chinese Characters Clustering" target="_blank" rel="external">https://zqzhao.cn/2018/01/25/CSDN-simple-chs-clustering/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/geekezhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/Avatar2.JPG" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/geekezhao" target="_blank"><span class="text-dark">Ziqi ZHAO</span><small class="ml-1x">Naive student.</small></a></h3>
+        <div>Nothing more.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2018/03/13/CSDN-news-clustering/" title="News Clustering by Title"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2017/11/16/CSDN-python-setting/" title="Python 3.5 Set-Up"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 Geek ZHAO
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Chinese Characters Clustering', 
+  owner: 'geekezhao', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

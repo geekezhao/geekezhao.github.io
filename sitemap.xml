@@ -2,6 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zqzhao.cn/2019/09/20/Seminar-TheoryRelatedCollection/</loc>
+    
+    <lastmod>2020-08-09T12:57:25.801Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/05/09/Seminar-WhatTheoryIsNot/</loc>
+    
+    <lastmod>2020-08-09T11:57:44.112Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/07/09/Seminar-social-similarity/</loc>
+    
+    <lastmod>2020-08-09T11:50:12.896Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/04/09/Seminar-agent-based-model/</loc>
+    
+    <lastmod>2020-08-09T11:16:22.953Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/04/17/Seminar-nk-model/</loc>
+    
+    <lastmod>2020-08-09T09:24:21.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/04/05/Seminar-construct/</loc>
+    
+    <lastmod>2020-08-09T09:24:07.443Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/08/08/module-discussion/</loc>
+    
+    <lastmod>2020-08-09T09:23:25.669Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/03/18/CSMATH-SVD/</loc>
+    
+    <lastmod>2020-08-09T09:23:19.141Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/03/31/CSMATH-GMM/</loc>
+    
+    <lastmod>2020-08-09T09:23:07.914Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2018/03/13/CSDN-news-clustering/</loc>
+    
+    <lastmod>2020-08-09T09:22:36.769Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/04/25/AMR-experiment/</loc>
+    
+    <lastmod>2020-08-09T09:21:48.200Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://zqzhao.cn/2020/04/18/AMR-examination/</loc>
+    
+    <lastmod>2020-08-09T09:21:18.422Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zqzhao.cn/2020/08/07/module-intro/</loc>
     
     <lastmod>2020-08-08T12:32:15.598Z</lastmod>
@@ -16,42 +100,21 @@
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2020/07/09/social-similarity/</loc>
-    
-    <lastmod>2020-07-09T16:13:02.416Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/04/29/content-analysis/</loc>
+    <loc>https://zqzhao.cn/2020/04/29/AMR-content-analysis/</loc>
     
     <lastmod>2020-04-29T08:53:45.587Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2020/04/28/grounded-theory/</loc>
+    <loc>https://zqzhao.cn/2020/04/28/AMR-grounded-theory/</loc>
     
     <lastmod>2020-04-29T07:32:25.755Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2020/04/25/experiment/</loc>
-    
-    <lastmod>2020-04-25T03:59:54.680Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/04/18/examination/</loc>
-    
-    <lastmod>2020-04-25T03:57:39.157Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2017/02/04/3hoursOOP/</loc>
+    <loc>https://zqzhao.cn/2017/02/04/CSDN-3hoursOOP/</loc>
     
     <lastmod>2020-04-18T06:18:02.201Z</lastmod>
     
@@ -65,58 +128,23 @@
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2017/11/14/hierarchical-clustering/</loc>
+    <loc>https://zqzhao.cn/2017/11/14/CSDN-hierarchical-clustering/</loc>
     
     <lastmod>2020-04-18T05:55:07.958Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2017/11/02/k-means/</loc>
+    <loc>https://zqzhao.cn/2017/11/02/CSDN-k-means/</loc>
     
     <lastmod>2020-04-18T05:46:11.337Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2020/03/18/SVD/</loc>
-    
-    <lastmod>2020-04-18T05:42:37.735Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/03/31/GMM/</loc>
-    
-    <lastmod>2020-04-18T05:33:47.106Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/04/17/nk-model/</loc>
-    
-    <lastmod>2020-04-18T04:00:55.758Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/04/05/Burton-summary/</loc>
+    <loc>https://zqzhao.cn/2020/04/05/Seminar-Burton-summary/</loc>
     
     <lastmod>2020-04-17T12:48:09.012Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2020/04/05/construct/</loc>
-    
-    <lastmod>2020-04-17T12:48:03.670Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://zqzhao.cn/2018/03/13/news-clustering/</loc>
-    
-    <lastmod>2020-04-05T09:14:15.721Z</lastmod>
     
   </url>
   
@@ -128,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2017/11/16/python-setting/</loc>
+    <loc>https://zqzhao.cn/2017/11/16/CSDN-python-setting/</loc>
     
     <lastmod>2020-04-05T04:10:19.867Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://zqzhao.cn/2018/01/25/simple-chs-clustering/</loc>
+    <loc>https://zqzhao.cn/2018/01/25/CSDN-simple-chs-clustering/</loc>
     
     <lastmod>2020-04-05T02:57:13.105Z</lastmod>
     

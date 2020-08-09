@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Experiment | Hexo</title>
+  <meta name="description" content="行为经济学（Behavioral Economics）是将心理学的研究成果引入经济分析的经济学新分支，而实验经济学（Experimental Economics）是行为经济学模型的主要实证手段。行为经济学的研究经过了三代学者的发展。20世纪80—90年代，第一代行为经济学家指出了传统经济理论无法解释的异常现象（如，禀赋效应、阿莱悖论、经济衰退中的工资刚性等）；而20世纪90年代至21世纪初，第二代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Experiment">
+<meta property="og:url" content="https://zqzhao.cn/2020/04/25/AMR-experiment/index.html">
+<meta property="og:site_name" content="Geeke&#39;s Blog">
+<meta property="og:description" content="行为经济学（Behavioral Economics）是将心理学的研究成果引入经济分析的经济学新分支，而实验经济学（Experimental Economics）是行为经济学模型的主要实证手段。行为经济学的研究经过了三代学者的发展。20世纪80—90年代，第一代行为经济学家指出了传统经济理论无法解释的异常现象（如，禀赋效应、阿莱悖论、经济衰退中的工资刚性等）；而20世纪90年代至21世纪初，第二代">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-25T03:56:29.000Z">
+<meta property="article:modified_time" content="2020-08-09T09:21:48.200Z">
+<meta property="article:author" content="Geek ZHAO">
+<meta property="article:tag" content="Theorical_Basis">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zqzhao.cn/2020/04/25/AMR-experiment/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Geeke&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/geekezhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/Avatar2.JPG" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ziqi ZHAO</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Naive student.</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Hello!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Theory/">Theory</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Article-Template-MIS/" rel="tag">Article_Template_MIS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS-Math/" rel="tag">CS_Math</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clustering/" rel="tag">Clustering</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIS-thinking/" rel="tag">MIS_thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theorical-Basis/" rel="tag">Theorical_Basis</a><span class="tag-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Article-Template-MIS/" style="font-size: 13.5px;">Article_Template_MIS</a> <a href="/tags/CS-Math/" style="font-size: 13.25px;">CS_Math</a> <a href="/tags/Clustering/" style="font-size: 13.75px;">Clustering</a> <a href="/tags/MIS-thinking/" style="font-size: 13px;">MIS_thinking</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Theorical-Basis/" style="font-size: 14px;">Theorical_Basis</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-discussion/" class="title">Article Template of MIS - Discussion</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T14:02:33.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-origin/" class="title">Article Template of MIS - Origin</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T11:51:53.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/07/module-intro/" class="title">Article Template of MIS - Introduction</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-07T14:30:12.000Z" itemprop="datePublished">2020-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/09/Seminar-social-similarity/" class="title">Social Similarity</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-09T10:58:02.000Z" itemprop="datePublished">2020-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/09/Seminar-WhatTheoryIsNot/" class="title">Seminar-WhatTheoryIsNot</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-09T11:40:42.000Z" itemprop="datePublished">2020-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-AMR-experiment" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Experiment
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/25/AMR-experiment/" class="article-date">
+	  <time datetime="2020-04-25T03:56:29.000Z" itemprop="datePublished">2020-04-25</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Theory/">Theory</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/Theorical-Basis/" rel="tag">Theorical_Basis</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/25/AMR-experiment/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.3k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 7(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>行为经济学（Behavioral Economics）是将心理学的研究成果引入经济分析的经济学新分支，而实验经济学（Experimental Economics）是行为经济学模型的主要实证手段。行为经济学的研究经过了三代学者的发展。20世纪80—90年代，第一代行为经济学家指出了传统经济理论无法解释的异常现象（如，禀赋效应、阿莱悖论、经济衰退中的工资刚性等）；而20世纪90年代至21世纪初，第二代行为经济学家针对上述心理现象建立一般性的理论模型，如，level-k学习模型、以负罪厌恶为基础的守约模型等；而最近几年第三代行为经济学的研究人员开始将第二代的研究成果运用到应用领域中去，而行为合约设计就是其中的热点。比如，劳动力市场的合约设计将在本文第四部分详细讨论。</p>
+<p><a href="https://www.sohu.com/a/203157674_649798" target="_blank" rel="noopener">sohu博客</a></p>
+<p>（一）科学研究中的内部有效性和外部有效性</p>
+<p>任何一种科学研究，都面临着内部有效性和外部有效性两方面的挑战。内部有效性（Internal Validity）是指，研究人员分析某一种特定因素所造成的效果时，一定不能把其他原因造成的效果错误地归结到被研究的对象上。比如，当我们分析一种药物对心血管疾病的疗效时，如果病情较重的人服用了药物而病情较轻的人未服药，那么病情的轻重程度会对分析结论造成干扰；如果参加某种劳动技能培训的人的智力水平高于未参加培训的人的智力水平，那么研究人员所观察到的“技能培训的效果”有可能来自智力水平的差别。而外部有效性（External Validity）是指，从有限样本中得出的研究结论，究竟在多大程度上能推广到总体中去。比如，某一种药在美国的临床实践中取得了效果，那么这种药能否在中国的临床中取得效果？如果理论经济学家所设计出来的市场机制通过经济实验取得了成功，那么这一机制在现实生活中的效果又会如何？</p>
+<p>首先需要指出的是，确保内部有效性是所有研究工作的起点。误读了经济现象背后的真实原因，无论其应用环境是否贴近现实，都必然会误导政策制定与制度安排。在内部有效性得到保证的基础上，研究人员再继续探讨研究结论的外部有效性，即研究结论的适用范围（比如，无论经济学理论研究还是经济学实证研究，都有针对经济学理论模型或实证数据分析的Robustness Check，即适用性检验）。其次需要指出的是，没有任何一种经济学研究方法能在内部有效性和外部有效性两方面同时做到完美，理论（Theories）、实验（Experiments）和观察性实证方法（Observational Empirical Methods）各有所长。经济学实验在经济学的实证研究方法中是内部有效性最强的研究手段，其代价是外部有效性受到一定限制。</p>
+<p>（二）经济实验：通过“控制”实现内部有效性</p>
+<p>经济实验的本质，就是通过研究人员对实验的“控制”实现内部有效性。经济实验中的控制手段包括：研究人员将来自同一群体（如某高校的本科生）的实验参加者随机分配到不同的实验条件中去、以消除不同实验条件下的参加者的系统性差异，从而不同实验条件下实验结果的差异只能归结于不同实验条件下实验设置的差别，而不能归结于不同实验条件下参加者的差异；在同一实验设置下参加者阅读相同的实验说明，以确保参加者接受相同的信息；实验说明中通常采用中性词语，以避免与研究问题无关的社会偏好对实验结果造成干扰……等。朱富强一文中所讨论的“双盲设计”（即实验参加者之间相互匿名，且参加者对研究人员也匿名），也是一种常见的实验控制手段。“双盲设计”能降低研究人员的观察效应、社会距离等因素对实验结果的干扰。</p>
+<p>第一点需要澄清的是，研究人员通过实验设计对实验进行控制的目的，是为了实现内部有效性，而不是像朱富强一文所提到的为了迎合“主流经济学”、确保主流经济理论中的结论被实验验证。以Hoffman，McCabe，Shachat，Smith的研究工作为例（这一工作也在朱富强一文中提到了）：一名实验参加者是分配者，另一名实验参加者是接受者；由分配者将10美元在分配者与接受者之间分配，而接受者只能接受分配者的提案、没有讨价还价的余地。在传统经济学的自利前提下，理论预测分配者会将全部10美元归为己有。但实验结果表明，即便是在双盲设计下，作为分配者的参加者通常会留1到2美元给接受者。这个实验的证据表明利他偏好（Other-Regarding Preference）确实会在经济活动中发挥作用，按照朱富强一文的分类方法，这一实验应该是属于“反主流”的。恰恰是“双盲设计”等严格的实验控制手段，使得Hoffman等人的研究结论更加稳健：即便是在最容易出现自利行为的双盲设计下，研究人员都观察到了利他行为，从而我们很难把这种利他行为归结于研究人员的压力或诱导等其他原因。</p>
+<p>第二点需要澄清的是，实验控制从未将实验参加者的社会性抽象掉，“最大限度地将受试者还原为孤立的原子个体，甚至是类似机器般的成本——收益反应者”。经济学理论的出发点，包括关于经济环境的结构性假设和关于经济活动参与主体的行为假设两类。经济实验通过控制，能在实验环境中最大程度再现经济学理论中的结构性假设（如初始禀赋的分布、成本的结构，等等），但实验设计中并不对实验参加者的行为进行假设（参加者是否能够充分有效处理全部信息、是否逆向归纳，等等）。因此，如果实验表明理论失效，能够相对容易地得知理论失效的原因（比如，可以进一步通过实验验证究竟是哪一条行为假设脱离实际情况）。而通过现实生活中的数据检验理论，其难点在于现实生活与经济学理论中的结构性假设存在距离，从而很难确定理论失效的具体原因。</p>
+<p>（三）实地实验：对实验结论外部有效性的回应</p>
+<p>近年来，学界对经济学实验的批评集中在实验结论的外部有效性上。比如，经济学的实验室实验通常征召本科生作为实验参加者，支付相对较低的报酬，而实验在较短的时间内完成。那么如果参加者群体发生变化（如有丰富经验的从业者）、报酬规模发生变化、实验环境是现实生活中的市场，实验结论是否也会发生变化？</p>
+<p>21世纪日益受到重视的实地实验（Field Experiment）是对这类质疑的有力回应。实地实验是介于实验室实验和完全基于现实市场所自然产生的数据的观察性实证方法之间的一种实证手段。实地实验与实验室实验相同的是，研究人员将实验参与者随机分配到不同实验条件中去，从而能有效避免样本选择或内生性造成的系统性偏差。但实地实验在现实生活中的市场里进行，从而研究人员对实验的控制不如实验室实验完美（如研究人员很难在现实生活中控制价值、成本、信息等因素）。实证方法中，从内部有效性来说，实验室实验最强，实地实验次之，观察性实证方法最弱；从外部有效性来说，顺序正好颠倒：观察性实证方法最强，实地实验次之，实验室实验最弱。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zqzhao.cn/2020/04/25/AMR-experiment/" title="Experiment" target="_blank" rel="external">https://zqzhao.cn/2020/04/25/AMR-experiment/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/geekezhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/Avatar2.JPG" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/geekezhao" target="_blank"><span class="text-dark">Ziqi ZHAO</span><small class="ml-1x">Naive student.</small></a></h3>
+        <div>Nothing more.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/28/AMR-grounded-theory/" title="Grounded Theory"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/18/AMR-examination/" title="Examination &amp; Check"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 Geek ZHAO
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Experiment', 
+  owner: 'geekezhao', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
