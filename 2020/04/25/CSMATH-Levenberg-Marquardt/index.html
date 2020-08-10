@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>Levenberg-Marquardt | Hexo</title>
+  <meta name="description" content="GoalImplement the  Levenberg-Marquardt algorithm  Design your own test functions, two variable functions are highly recommended.   Plot the iteration steps  Reading MaterialLevmar Code1234567891011121">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Levenberg-Marquardt">
+<meta property="og:url" content="https://zqzhao.cn/2020/04/25/CSMATH-Levenberg-Marquardt/index.html">
+<meta property="og:site_name" content="Geeke&#39;s Blog">
+<meta property="og:description" content="GoalImplement the  Levenberg-Marquardt algorithm  Design your own test functions, two variable functions are highly recommended.   Plot the iteration steps  Reading MaterialLevmar Code1234567891011121">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zqzhao.cn/img/Levmar-result.png">
+<meta property="article:published_time" content="2020-04-25T08:24:31.000Z">
+<meta property="article:modified_time" content="2020-08-10T11:09:54.514Z">
+<meta property="article:author" content="Geek ZHAO">
+<meta property="article:tag" content="CS_Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zqzhao.cn/img/Levmar-result.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zqzhao.cn/2020/04/25/CSMATH-Levenberg-Marquardt/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Geeke&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/geekezhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/Avatar2.JPG" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ziqi ZHAO</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Naive student.</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Hello!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Theory/">Theory</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Article-Template-MIS/" rel="tag">Article_Template_MIS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS-Math/" rel="tag">CS_Math</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clustering/" rel="tag">Clustering</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIS-thinking/" rel="tag">MIS_thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theorical-Basis/" rel="tag">Theorical_Basis</a><span class="tag-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Article-Template-MIS/" style="font-size: 13.33px;">Article_Template_MIS</a> <a href="/tags/CS-Math/" style="font-size: 13.67px;">CS_Math</a> <a href="/tags/Clustering/" style="font-size: 13.67px;">Clustering</a> <a href="/tags/MIS-thinking/" style="font-size: 13px;">MIS_thinking</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Theorical-Basis/" style="font-size: 14px;">Theorical_Basis</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-discussion/" class="title">Article Template of MIS - Discussion</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T14:02:33.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-origin/" class="title">Article Template of MIS - Origin</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T11:51:53.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/07/module-intro/" class="title">Article Template of MIS - Introduction</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-07T14:30:12.000Z" itemprop="datePublished">2020-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/09/Seminar-social-similarity/" class="title">Social Similarity</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-09T10:58:02.000Z" itemprop="datePublished">2020-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/09/Seminar-WhatTheoryIsNot/" class="title">What Theory Is Not</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-09T11:40:42.000Z" itemprop="datePublished">2020-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CSMATH-Levenberg-Marquardt" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Levenberg-Marquardt
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/04/25/CSMATH-Levenberg-Marquardt/" class="article-date">
+	  <time datetime="2020-04-25T08:24:31.000Z" itemprop="datePublished">2020-04-25</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CS-Math/" rel="tag">CS_Math</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/04/25/CSMATH-Levenberg-Marquardt/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 902(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h4><p>Implement the  Levenberg-Marquardt algorithm</p>
+<ul>
+<li>Design your own test functions, two variable functions are highly recommended.  </li>
+<li>Plot the iteration steps</li>
+</ul>
+<h4 id="Reading-Material"><a href="#Reading-Material" class="headerlink" title="Reading Material"></a>Reading Material</h4><p><a href="http://users.ics.forth.gr/~lourakis/levmar/levmar.pdf" target="_blank" rel="noopener">Levmar</a></p>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># Based on http:&#x2F;&#x2F;users.ics.forth.gr&#x2F;~lourakis&#x2F;levmar&#x2F;levmar.pdf</span><br><span class="line"># Using f &#x3D; a*exp(b*x) as primary function</span><br><span class="line"></span><br><span class="line">para_real &#x3D; [1,2] # set primary parameters</span><br><span class="line"></span><br><span class="line"># set-up</span><br><span class="line">k &#x3D; 0</span><br><span class="line">k_max &#x3D; 100</span><br><span class="line">nu &#x3D; 2 </span><br><span class="line">para_quasi &#x3D; [4,5] # set a random parameter set</span><br><span class="line"># A &#x3D; J.T.dot(J)</span><br><span class="line"># F &#x3D; a*np.exp(b*x)</span><br><span class="line"># eps_p &#x3D; a*np.exp(b*x)-y # eps_p is cost function</span><br><span class="line"># g &#x3D; J.T.dot(F)</span><br><span class="line">tao &#x3D; 10**(-3)</span><br><span class="line"># miu &#x3D; tao*np.max(np.linalg.eig(A)[0]) # in course slides is 4.</span><br><span class="line"></span><br><span class="line">eps1 &#x3D; 10**(-15)</span><br><span class="line">eps2 &#x3D; 10**(-15) # 此处在论文中eps1是函数值的threshold, eps2是对变量值的threshold</span><br><span class="line">eps3 &#x3D; 10**(-15) # 此处增加对cost的threshold</span><br><span class="line"># stop</span><br><span class="line"># stop &#x3D; np.linalg.norm(g, ord&#x3D;np.inf) &lt;&#x3D; eps1</span><br><span class="line"></span><br><span class="line"># a,b&#x3D;np.linalg.eig(x) ##特征值赋值给a，对应特征向量赋值给b </span><br><span class="line"># #特征值全都正，即为正定矩阵</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">def func_F(para, input_data):</span><br><span class="line">    a &#x3D; [para[0]*np.exp(para[1]*x) for x in input_data]</span><br><span class="line">    a &#x3D; np.array(a)</span><br><span class="line">    return a</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">#generating the input_data and output_data,whose shape both is (num_data,1)</span><br><span class="line">def Generate(para, data_num):</span><br><span class="line">    input_data &#x3D; np.array(np.linspace(0,15,data_num)).reshape(data_num,1)       # 产生包含噪声的数据</span><br><span class="line">    mid,sigma &#x3D; 0,5</span><br><span class="line">    output_data &#x3D; func_F(para,input_data) + np.random.normal(mid, sigma, data_num).reshape(data_num,1)</span><br><span class="line">    </span><br><span class="line">    return input_data, output_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#calculating the derive of pointed parameter,whose shape is (num_data,1)</span><br><span class="line">def Deriv(para_quasi, input_data, para_index):</span><br><span class="line">#     print(para_index)</span><br><span class="line">    para_quasi1 &#x3D; para_quasi.copy()</span><br><span class="line">    para_quasi2 &#x3D; para_quasi.copy()</span><br><span class="line">    </span><br><span class="line">    para_quasi1[para_index] +&#x3D; 0.000001</span><br><span class="line">    para_quasi2[para_index] -&#x3D; 0.000001</span><br><span class="line">    </span><br><span class="line">    data_est_output1 &#x3D; func_F(para_quasi1,input_data)</span><br><span class="line">    data_est_output2 &#x3D; func_F(para_quasi2,input_data)</span><br><span class="line">    </span><br><span class="line">    a &#x3D; (data_est_output1 - data_est_output2) &#x2F; 0.000002    </span><br><span class="line"></span><br><span class="line">    return (data_est_output1 - data_est_output2) &#x2F; 0.000002    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#calculating jacobian matrix,whose shape is (num_data,num_params)</span><br><span class="line">def Jacobian(para_quasi, input_data):</span><br><span class="line">    para_num &#x3D; np.shape(para_quasi)[0]</span><br><span class="line">    data_num &#x3D; np.shape(input_data)[0]</span><br><span class="line">    J &#x3D; np.zeros((data_num,para_num))</span><br><span class="line">    for i in range(0,para_num):</span><br><span class="line">        J[:,i] &#x3D; list(Deriv(para_quasi,input_data,i))</span><br><span class="line">    </span><br><span class="line">    return J</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def func_g(para_quasi, input_data, output_real):</span><br><span class="line">    F &#x3D; func_F(para_quasi, input_data)</span><br><span class="line">    J &#x3D; Jacobian(para_quasi, input_data)</span><br><span class="line">    eps_p &#x3D; output_real - F</span><br><span class="line">    g &#x3D; J.T.dot(eps_p)</span><br><span class="line">    </span><br><span class="line">    return g</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">data_num &#x3D; 100</span><br><span class="line">para_num &#x3D; 2</span><br><span class="line">para_real &#x3D; [1,2] # set primary parameters</span><br><span class="line">para_quasi &#x3D; [4,5] # set a random parameter set</span><br><span class="line"></span><br><span class="line">input_data, output_real &#x3D; Generate(para_real, data_num)</span><br><span class="line">k &#x3D; 0</span><br><span class="line">k_max &#x3D; 10000</span><br><span class="line">nu &#x3D; 2 </span><br><span class="line">J &#x3D; Jacobian(para_quasi, input_data)</span><br><span class="line">A &#x3D; J.T.dot(J)</span><br><span class="line"># F &#x3D; a*np.exp(b*x)</span><br><span class="line"># eps_p &#x3D; a*np.exp(b*x)-y # eps_p is cost function</span><br><span class="line">g &#x3D; func_g(para_quasi, input_data, output_real)</span><br><span class="line">eps1 &#x3D; 10**(-12)</span><br><span class="line">tao &#x3D; 10**(-3)</span><br><span class="line">miu &#x3D; tao*np.max(np.linalg.eig(A)[0]) # in course slides is 4.</span><br><span class="line"></span><br><span class="line">stop &#x3D; np.linalg.norm(g, ord&#x3D;np.inf) &lt;&#x3D; eps1</span><br><span class="line"></span><br><span class="line">delta &#x3D; [] # 一个用来放cost的没用数组</span><br><span class="line"></span><br><span class="line">while (not stop) and (k &lt; k_max):</span><br><span class="line">    k +&#x3D; 1</span><br><span class="line">    print(k)</span><br><span class="line">    while(True):</span><br><span class="line">        s &#x3D; np.linalg.inv(A + miu*np.eye(para_num)).dot(g)</span><br><span class="line">        </span><br><span class="line">        print(&#39;    &#39;, np.linalg.norm(s))</span><br><span class="line">        if np.linalg.norm(s) &lt;&#x3D; eps2:</span><br><span class="line">            stop &#x3D; True</span><br><span class="line">        else:</span><br><span class="line">            F &#x3D; func_F(para_quasi, input_data)</span><br><span class="line">            eps_p &#x3D; output_real - F</span><br><span class="line">            delta.append(sum([x**2 for x in (eps_p.T).tolist()[0]]))</span><br><span class="line"></span><br><span class="line">            para_quasi_new &#x3D; [para_quasi[0] + s[0,0], para_quasi[1] + s[1,0]]</span><br><span class="line">            print(&#39;    &#39;, para_quasi_new)</span><br><span class="line">            F_new &#x3D; func_F(para_quasi_new, input_data)</span><br><span class="line">            eps_p_new &#x3D; output_real - F_new</span><br><span class="line">            </span><br><span class="line">            rou &#x3D; (np.linalg.norm(eps_p)**2 - np.linalg.norm(eps_p_new)**2) &#x2F; (s.T.dot(miu*s + g))</span><br><span class="line">            # print(&#39;rou &#x3D; &#39;, rou[0][0])</span><br><span class="line">            # 不知道为什么rou是[[x]]形式的</span><br><span class="line">            rou &#x3D; rou[0][0]</span><br><span class="line">            if rou &gt; 0:</span><br><span class="line">                para_quasi &#x3D; para_quasi_new</span><br><span class="line">                J &#x3D; Jacobian(para_quasi, input_data)</span><br><span class="line">                A &#x3D; J.T.dot(J)</span><br><span class="line">                eps_p &#x3D; eps_p_new</span><br><span class="line">                g &#x3D; func_g(para_quasi, input_data, output_real)</span><br><span class="line">                stop &#x3D; np.linalg.norm(g, ord&#x3D;np.inf) &lt;&#x3D; eps1 or np.linalg.norm(eps_p)**2 &lt;&#x3D; eps3</span><br><span class="line">                miu &#x3D; miu*max(1&#x2F;3, 1-(2*rou-1)**3)</span><br><span class="line">                nu &#x3D; 2</span><br><span class="line">            else:</span><br><span class="line">                miu &#x3D; miu*nu</span><br><span class="line">                nu *&#x3D; 2</span><br><span class="line">                print(&quot;    [miu, nu] &#x3D; &quot;, miu,&#39; , &#39;, nu)</span><br><span class="line">        </span><br><span class="line">        if rou &gt; 0 or stop:</span><br><span class="line">            break</span><br><span class="line"></span><br><span class="line">delta.append(sum([x**2 for x in (eps_p.T).tolist()[0]]))</span><br><span class="line">print(para_quasi)</span><br><span class="line"># print(para_real)</span><br><span class="line"># print(delta)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(range(0, len(delta)), delta)</span><br><span class="line">plt.xlabel(&quot;iteration times&quot;)</span><br><span class="line">plt.ylabel(&quot;eps_p squared sum&quot;)</span><br><span class="line">plt.title(&quot;eps_p squared sum (error)&quot;)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line"># plt.scatter(input_data, output_real, color&#x3D;&#39;b&#39;, s&#x3D;)</span><br><span class="line">plt.plot(range(0, 16), func_F(para_real, range(0, 16)), color&#x3D;&#39;g&#39;, )</span><br><span class="line"></span><br><span class="line">plt.scatter(input_data, func_F(para_quasi, input_data), color&#x3D;&#39;r&#39;)</span><br><span class="line"># plt.plot(range(0, 10), func_F(para_quasi, range(0, 10)), color&#x3D;&#39;purple&#39;)</span><br><span class="line"># 用估计的点和原函数看下拟合结果</span><br><span class="line">plt.xlabel(&quot;x&quot;)</span><br><span class="line">plt.ylabel(&quot;y&quot;)</span><br><span class="line">plt.title(&quot;estimation result&quot;)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h4><p><img src="/img/Levmar-result.png" alt=""></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zqzhao.cn/2020/04/25/CSMATH-Levenberg-Marquardt/" title="Levenberg-Marquardt" target="_blank" rel="external">https://zqzhao.cn/2020/04/25/CSMATH-Levenberg-Marquardt/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/geekezhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/Avatar2.JPG" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/geekezhao" target="_blank"><span class="text-dark">Ziqi ZHAO</span><small class="ml-1x">Naive student.</small></a></h3>
+        <div>Nothing more.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/04/28/AMR-grounded-theory/" title="Grounded Theory"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/25/AMR-experiment/" title="Experiment"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 Geek ZHAO
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'Levenberg-Marquardt', 
+  owner: 'geekezhao', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

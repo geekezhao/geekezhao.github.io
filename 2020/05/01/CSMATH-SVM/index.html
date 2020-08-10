@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>SVM | Hexo</title>
+  <meta name="description" content="Reading Materials 下述代码中SVM的拉格朗日对偶推导参考 cnblog 拉格朗日对偶推导参考2 cnblog2 kernel推导参考1 kernel1 kernel推导参考2《支持向量机导论》 代码细节参考1 github  代码细节参考2 Jianshu Active Set原理实现参考M. Asghar Bhatti《Practical Optimization Method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SVM">
+<meta property="og:url" content="https://zqzhao.cn/2020/05/01/CSMATH-SVM/index.html">
+<meta property="og:site_name" content="Geeke&#39;s Blog">
+<meta property="og:description" content="Reading Materials 下述代码中SVM的拉格朗日对偶推导参考 cnblog 拉格朗日对偶推导参考2 cnblog2 kernel推导参考1 kernel1 kernel推导参考2《支持向量机导论》 代码细节参考1 github  代码细节参考2 Jianshu Active Set原理实现参考M. Asghar Bhatti《Practical Optimization Method">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://zqzhao.cn/img/SVM_1.png">
+<meta property="og:image" content="https://zqzhao.cn/img/SVM_2.png">
+<meta property="og:image" content="https://zqzhao.cn/img/SVM_2.png">
+<meta property="article:published_time" content="2020-05-01T09:05:21.000Z">
+<meta property="article:modified_time" content="2020-08-10T11:12:52.888Z">
+<meta property="article:author" content="Geek ZHAO">
+<meta property="article:tag" content="CS_Math">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zqzhao.cn/img/SVM_1.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="https://zqzhao.cn/2020/05/01/CSMATH-SVM/index.html">
+  
+    <link rel="alternate" href="/atom.xml" title="Geeke&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitment@0.0.3/style/default.min.css">
+  
+  
+  
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body class="main-center" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/geekezhao" target="_blank">
+          <img class="img-circle img-rotate" src="/images/Avatar2.JPG" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Ziqi ZHAO</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Naive student.</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Hangzhou, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav menu-highlight">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>Hello!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Tech/">Tech</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Theory/">Theory</a><span class="category-list-count">14</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Article-Template-MIS/" rel="tag">Article_Template_MIS</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS-Math/" rel="tag">CS_Math</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Clustering/" rel="tag">Clustering</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIS-thinking/" rel="tag">MIS_thinking</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OOP/" rel="tag">OOP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Theorical-Basis/" rel="tag">Theorical_Basis</a><span class="tag-list-count">10</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Article-Template-MIS/" style="font-size: 13.33px;">Article_Template_MIS</a> <a href="/tags/CS-Math/" style="font-size: 13.67px;">CS_Math</a> <a href="/tags/Clustering/" style="font-size: 13.67px;">Clustering</a> <a href="/tags/MIS-thinking/" style="font-size: 13px;">MIS_thinking</a> <a href="/tags/OOP/" style="font-size: 13px;">OOP</a> <a href="/tags/Theorical-Basis/" style="font-size: 14px;">Theorical_Basis</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-discussion/" class="title">Article Template of MIS - Discussion</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T14:02:33.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/08/module-origin/" class="title">Article Template of MIS - Origin</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-08T11:51:53.000Z" itemprop="datePublished">2020-08-08</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/08/07/module-intro/" class="title">Article Template of MIS - Introduction</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-08-07T14:30:12.000Z" itemprop="datePublished">2020-08-07</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/07/09/Seminar-social-similarity/" class="title">Social Similarity</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-07-09T10:58:02.000Z" itemprop="datePublished">2020-07-09</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Theory/">Theory</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/05/09/Seminar-WhatTheoryIsNot/" class="title">What Theory Is Not</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-05-09T11:40:42.000Z" itemprop="datePublished">2020-05-09</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-CSMATH-SVM" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SVM
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/05/01/CSMATH-SVM/" class="article-date">
+	  <time datetime="2020-05-01T09:05:21.000Z" itemprop="datePublished">2020-05-01</time>
+	</a>
+</span>
+        
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link" href="/tags/CS-Math/" rel="tag">CS_Math</a>
+  </span>
+
+
+        
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/05/01/CSMATH-SVM/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.8k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 10(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="Reading-Materials"><a href="#Reading-Materials" class="headerlink" title="Reading Materials"></a>Reading Materials</h4><ul>
+<li>下述代码中SVM的拉格朗日对偶推导参考 <a href="https://www.cnblogs.com/hanzi5/p/10105614.html" target="_blank" rel="noopener">cnblog</a></li>
+<li>拉格朗日对偶推导参考2 <a href="https://www.cnblogs.com/tonglin0325/p/6078439.html" target="_blank" rel="noopener">cnblog2</a></li>
+<li>kernel推导参考1 <a href="http://www.blogjava.net/zhenandaci/archive/2009/03/06/258288.html" target="_blank" rel="noopener">kernel1</a></li>
+<li>kernel推导参考2《支持向量机导论》</li>
+<li>代码细节参考1 <a href="https://github.com/akiori/AMCS_HW5/blob/master/svm.py" target="_blank" rel="noopener">github</a> </li>
+<li>代码细节参考2 <a href="https://www.jianshu.com/p/64b290d94272" target="_blank" rel="noopener">Jianshu</a></li>
+<li>Active Set原理实现参考<pre><code>M. Asghar Bhatti《Practical Optimization Methods With mathematical Applications》Chapter8.4
+</code></pre></li>
+<li>代码变量命名尽量与Bhatti书中对应</li>
+</ul>
+<h4 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 先写一下带kernel的SVM的拉格朗日对偶形式</span><br><span class="line"># min_alpha 1&#x2F;2*sum_&#123;i&#x3D;1 to n&#125;sum_&#123;j&#x3D;1 to n&#125;*alpha_i*alpha_j*y_i*y_j*phi(x.T)*phi(x)</span><br><span class="line"># s.t. alpha_i &gt;&#x3D; 0</span><br><span class="line">#      sum_&#123;i&#x3D;1 to n&#125;*alpha_i*y_i &#x3D; 0</span><br><span class="line"># </span><br><span class="line"># </span><br><span class="line"># 二次规划基本形：</span><br><span class="line"># min_X 1&#x2F;2*X.T*H*X + c.T*X</span><br><span class="line"># s.t. AX &gt;&#x3D; b</span><br><span class="line"># </span><br><span class="line"># </span><br><span class="line"># 在上述优化问题中，对应到二次规划：</span><br><span class="line"># alpha是现在要求的二次规划基本形里的X，【y_i*y_j*phi(x.T)*phi(x)】整个是H</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 在Active Set Method中，根据Bhatti书中所述，主要有几个步骤：</span><br><span class="line"># 1. 确定起始点x0</span><br><span class="line"># 2. 确定迭代方向d_k（如果当前的是x_k，那么此时迭代方向是d_k，x_&#123;k+1&#125; &#x3D; x_k + a*d_k，其中a是迭代步长）</span><br><span class="line"># 3. 看d_k，也就是是否需要迭代，这一步的实质是看现在的x满足了多少constraint</span><br><span class="line"># 4. 如果还需要继续迭代，x_&#123;k+1&#125; &#x3D; x_k + a*d_k</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"># 在ASM结束后，求到了ahpla，那放进去一个新的x如何判断class呢？</span><br><span class="line"># 由于w &#x3D; sum_&#123;i&#x3D;1 to n&#125;*alpha_i*y_i*phi(x)就可以确定w</span><br><span class="line"># 由于b &#x3D; &#123;1 - sum_&#123;j&#x3D;1 to n&#125;*alpha_j*y_i*y_j*k&lt;x_i, x_j&gt;&#125;&#x2F;y_j</span><br><span class="line"># 且由于引入kernel，并不需要知道phi(x)的值，也就是不用算出w，直接开算：</span><br><span class="line"># f(x) &#x3D; w.T*phi(x)+b &#x3D; sum_&#123;i&#x3D;1 to n&#125;*alphi_i*y_i*k&lt;x_i, x&gt;+b</span><br><span class="line"># 上式与0比较判别class</span><br></pre></td></tr></table></figure>
+<h4 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line">import random</span><br><span class="line">import sklearn</span><br><span class="line">import matplotlib.pyplot as plt</span><br><span class="line"></span><br><span class="line"># Generate 20 dots for each group</span><br><span class="line">n &#x3D; 20</span><br><span class="line">group1_center &#x3D; [8, 10] # 20 dots</span><br><span class="line">group2_center1 &#x3D; [1, 1] # 10 dots</span><br><span class="line">group2_center2 &#x3D; [16, 19] # 10 dots</span><br><span class="line"></span><br><span class="line">x1 &#x3D; []</span><br><span class="line">x2 &#x3D; []</span><br><span class="line">y1 &#x3D; [1 for i in range(0,n)]</span><br><span class="line">y2 &#x3D; [-1 for i in range(0,n)]</span><br><span class="line"></span><br><span class="line">for i in range(0, n):</span><br><span class="line">    ele1 &#x3D; group1_center[0] + np.random.randn()</span><br><span class="line">    ele2 &#x3D; group1_center[1] + np.random.randn()</span><br><span class="line">    x1.append([ele1, ele2])</span><br><span class="line"></span><br><span class="line">for i in range(0, int(n&#x2F;2)):</span><br><span class="line">    ele1 &#x3D; group2_center1[0] + np.random.randn()</span><br><span class="line">    ele2 &#x3D; group2_center1[1] + np.random.randn()</span><br><span class="line">    x2.append([ele1, ele2])</span><br><span class="line">for i in range(0, int(n&#x2F;2)):</span><br><span class="line">    ele1 &#x3D; group2_center2[0] + np.random.randn()</span><br><span class="line">    ele2 &#x3D; group2_center2[1] + np.random.randn()</span><br><span class="line">    x2.append([ele1, ele2])</span><br><span class="line"></span><br><span class="line">x1 &#x3D; np.array(x1)</span><br><span class="line">x2 &#x3D; np.array(x2)</span><br><span class="line"></span><br><span class="line">plt.scatter(x1[:,0], x1[:,1], c&#x3D;&#39;r&#39;) # class &#x3D; 1</span><br><span class="line">plt.scatter(x2[:,0], x2[:,1], c&#x3D;&#39;b&#39;) # class &#x3D; -1</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">x &#x3D; np.vstack((x1, x2))</span><br><span class="line">y &#x3D; np.hstack((y1, y2))</span><br><span class="line"># print(x)</span><br><span class="line"># print(y)</span><br></pre></td></tr></table></figure>
+<p><img src="/img/SVM_1.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br></pre></td><td class="code"><pre><span class="line">def IsZero(data):</span><br><span class="line">    if data &gt; 1e-5 or dataa &lt; -1e-5:</span><br><span class="line">        return False</span><br><span class="line">    return True</span><br><span class="line"></span><br><span class="line">def IsZeroVec(Vec):</span><br><span class="line">    for i in range(len(Vec)):</span><br><span class="line">        if not(IsZero(Vec[i])):</span><br><span class="line">            return False</span><br><span class="line">    return True</span><br><span class="line"></span><br><span class="line">def Guassian_k(x, y, sigma &#x3D; 7.0):</span><br><span class="line">    return np.exp(-np.linalg.norm(x-y)&#x2F; sigma)</span><br><span class="line"></span><br><span class="line">def Poly_k(x, y, c &#x3D; 2.0, a &#x3D; 1, d &#x3D; 2):</span><br><span class="line">    return (a*x.T.dot(y) + c)**d</span><br><span class="line"></span><br><span class="line"># solve Equality Constrained Quadratic Programming </span><br><span class="line"># f(x) &#x3D; 1&#x2F;2*d.T*Q*d+r.T*d     s.t. A*d &#x3D; b 注意此处是b，8.4.5原文是0</span><br><span class="line">def ECQP(Q, g, A, b):</span><br><span class="line">    rowA, colA &#x3D; A.shape</span><br><span class="line">    left &#x3D; np.vstack((Q, A))</span><br><span class="line">    right &#x3D; np.vstack((A.T, np.zeros((rowA, rowA)))) # 合成8.4.5中第二步等式左侧第一个矩阵</span><br><span class="line"></span><br><span class="line">    x &#x3D; np.linalg.solve(np.hstack((left, right)), np.vstack((-g, b)))</span><br><span class="line"></span><br><span class="line">    d &#x3D; x[:colA]</span><br><span class="line">    v &#x3D; x[colA:]</span><br><span class="line">    return d, v # d就是要求的迭代方向</span><br><span class="line"></span><br><span class="line">#active set method</span><br><span class="line">#CONSTRAINT: Gx &lt;&#x3D; h Ax &#x3D; b</span><br><span class="line">def ASM(x0, hessian, g, G, h, A &#x3D; [[0]], b &#x3D; 0):</span><br><span class="line">    #Step 1: find active set indices</span><br><span class="line">    #Ax &#x3D; b may be empty</span><br><span class="line">    zeroIdx &#x3D; []</span><br><span class="line">    if A.shape[0] &#x3D;&#x3D; len(x0):</span><br><span class="line">        rowA, colA &#x3D; A.shape</span><br><span class="line">    else:</span><br><span class="line">        rowA &#x3D; 0</span><br><span class="line">    rowG, colG &#x3D; G.shape</span><br><span class="line"></span><br><span class="line">    sum &#x3D; np.dot(G, x0)</span><br><span class="line">    tmp &#x3D; sum - h</span><br><span class="line">    for i in range(rowG):</span><br><span class="line">        if IsZero(tmp[i]):</span><br><span class="line">            zeroIdx.append(i)</span><br><span class="line">    iter &#x3D; 0</span><br><span class="line"></span><br><span class="line">    x &#x3D; x0</span><br><span class="line">    while True and iter &lt; 200:    </span><br><span class="line">    #Step 2 solve equality constraint optimization</span><br><span class="line">        gNew &#x3D; hessian.dot(x)+g</span><br><span class="line">        ANew &#x3D; np.zeros((rowA+len(zeroIdx), colG))</span><br><span class="line">        bNew &#x3D; np.zeros((rowA+len(zeroIdx), 1))</span><br><span class="line"></span><br><span class="line">        for i in range(rowA):</span><br><span class="line">            for j in range(colG):</span><br><span class="line">                ANew[i][j] &#x3D; A[i][j]</span><br><span class="line">        count &#x3D; 0</span><br><span class="line">        for i in zeroIdx:</span><br><span class="line">            for j in range(colG):</span><br><span class="line">                ANew[rowA+count][j] &#x3D; G[i][j]</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">        d, lamb &#x3D; ECQP(hessian, gNew, ANew, bNew)</span><br><span class="line">        </span><br><span class="line">        is_zero_vector &#x3D; True</span><br><span class="line">        if np.linalg.norm(d) &gt; 1e-5:</span><br><span class="line">            is_zero_vector &#x3D; False</span><br><span class="line">        if is_zero_vector:</span><br><span class="line">        #Step 3 if d is a zero vector</span><br><span class="line">            isOpt &#x3D; True</span><br><span class="line">            idxMin &#x3D; np.argmin(lamb)</span><br><span class="line">            lambMin &#x3D; lamb[idxMin]</span><br><span class="line">            if lambMin &lt; 0:</span><br><span class="line">                isOpt &#x3D; False</span><br><span class="line"></span><br><span class="line">            if isOpt:</span><br><span class="line">                output &#x3D; np.zeros((rowG, 1))</span><br><span class="line">                shift &#x3D; 0</span><br><span class="line">                for i in zeroIdx:</span><br><span class="line">                    output[i][0] &#x3D; lamb[shift]</span><br><span class="line">                    shift +&#x3D; 1 </span><br><span class="line">                return x, output</span><br><span class="line">                break</span><br><span class="line">            else:</span><br><span class="line">                zeroIdx.remove(idxMin)</span><br><span class="line">            iter +&#x3D; 1</span><br><span class="line">        else:</span><br><span class="line">        #Step 4 if not</span><br><span class="line">            alpha &#x3D; 1.</span><br><span class="line">            idxMin &#x3D; -1</span><br><span class="line">            for i in range(rowG):</span><br><span class="line">                if zeroIdx.count(i) &#x3D;&#x3D; 0:</span><br><span class="line">                    k &#x3D; (h[i][0]-G[i].T.dot(x))&#x2F;(G[i].T.dot(d))</span><br><span class="line">                    if k &lt;&#x3D; alpha and G[i].dot(d) &gt; 0:</span><br><span class="line">                        idxMin &#x3D; i</span><br><span class="line">                        alpha  &#x3D; k</span><br><span class="line">            x &#x3D; x+alpha*d</span><br><span class="line">            if idxMin !&#x3D; -1:</span><br><span class="line">                zeroIdx.append(idxMin)</span><br><span class="line">            iter +&#x3D; 1</span><br><span class="line">    return x, lamb</span><br><span class="line"></span><br><span class="line">def SVM(x, Y, kernel&#x3D;1):</span><br><span class="line">    num &#x3D; 40</span><br><span class="line">    dimension &#x3D; 2 # number of samples and dimension of samples</span><br><span class="line">    print(&quot;number of samples &#x3D; &quot;, num, &quot;,  dimension of samples &#x3D; &quot;, dimension)</span><br><span class="line">    </span><br><span class="line">    kerMat &#x3D; np.zeros((num, num))</span><br><span class="line">    hessian &#x3D; np.zeros((num, num))</span><br><span class="line">    A &#x3D; np.zeros((1, num))</span><br><span class="line">    for i in range(num):</span><br><span class="line">        A[0][i] &#x3D; Y[i]</span><br><span class="line">        for j in range(num):</span><br><span class="line">            if kernel &#x3D;&#x3D; 1:</span><br><span class="line">                kerMat[i][j] &#x3D; Guassian_k(x[i], x[j])</span><br><span class="line">            else:</span><br><span class="line">                kerMat[i][j] &#x3D; Poly_k(x[i], x[j])</span><br><span class="line">            hessian[i][j] &#x3D; kerMat[i][j] * Y[i] * Y[j]</span><br><span class="line"></span><br><span class="line">    g &#x3D; np.ones((num, 1)) * -1 # g^k &#x3D; Q*X^k+c</span><br><span class="line">    b &#x3D; np.zeros((1, 1)) # 8.4.5中的零矩阵</span><br><span class="line">    Q &#x3D; np.diag(np.ones(num) * -1) # 也就是上文中标准形的H，在8.4中用Q指代</span><br><span class="line">    h &#x3D; np.zeros((num, 1)) </span><br><span class="line">    count &#x3D; 0</span><br><span class="line">    for i in range(num):</span><br><span class="line">        if (Y[i] &#x3D;&#x3D; 1):</span><br><span class="line">            count +&#x3D; 1</span><br><span class="line">    x0 &#x3D; np.ones((num, 1))</span><br><span class="line">    for i in range(num):</span><br><span class="line">        if Y[i] &#x3D;&#x3D; 1:</span><br><span class="line">            #x0[i][0] &#x3D; 1.&#x2F;count</span><br><span class="line">            x0[i][0] &#x3D; num - count</span><br><span class="line">        else:</span><br><span class="line">            #x0[i][0] &#x3D; 1.&#x2F;(num-count)</span><br><span class="line">            x0[i][0] &#x3D; count</span><br><span class="line">    solution,  lamb &#x3D; ASM(x0, hessian, g, Q, h, A, b) # 求解alpha</span><br><span class="line">    a &#x3D; np.ravel(solution)</span><br><span class="line"></span><br><span class="line">    # find  ECQP multipliers larger than zero,  Support vectors have non zero lagrange multipliers</span><br><span class="line">    sv &#x3D; a &gt; 1e-5</span><br><span class="line">    ind &#x3D; np.arange(len(a))[sv]</span><br><span class="line">    # print(ind)</span><br><span class="line">    alpha &#x3D; a[sv]</span><br><span class="line">    suppData &#x3D; x[sv]</span><br><span class="line">    suppLab &#x3D; Y[sv]</span><br><span class="line">    print(&quot;Altogether &quot;+ str(num) +&quot; points with &quot;+ (str(len(alpha))) +&quot; support vectors&quot;)</span><br><span class="line">    </span><br><span class="line">    # b &#x3D; &#123;1 - sum_&#123;j&#x3D;1 to n&#125;*alpha_j*y_i*y_j*k&lt;x_i, x_j&gt;&#125;&#x2F;y_j</span><br><span class="line">    intercept &#x3D; 0</span><br><span class="line">    for i in range(len(alpha)):</span><br><span class="line">        intercept +&#x3D; suppLab[i]</span><br><span class="line">        intercept -&#x3D; np.sum(alpha * suppLab * kerMat[ind[i], sv])</span><br><span class="line">    intercept &#x2F;&#x3D; len(alpha)</span><br><span class="line">    return alpha, suppData, suppLab, intercept</span><br><span class="line"></span><br><span class="line">def project(x, alpha, suppData, suppLab, intercept, kernel &#x3D; 1):</span><br><span class="line">    y_predict &#x3D; np.zeros(len(x))</span><br><span class="line">    for i in range(len(x)):</span><br><span class="line">        s &#x3D; 0</span><br><span class="line">        for a,  data,  y in zip(alpha,  suppData,  suppLab):</span><br><span class="line">            if kernel &#x3D;&#x3D; 1:</span><br><span class="line">                s +&#x3D; a * y * Guassian_k(x[i], data)</span><br><span class="line">            else:</span><br><span class="line">                s +&#x3D; a * y * Poly_k(x[i], data)</span><br><span class="line">        y_predict[i] &#x3D; s</span><br><span class="line">    return (y_predict + intercept)</span><br><span class="line"></span><br><span class="line">def predict(x, alpha, suppData, suppLab, intercept, kernel):</span><br><span class="line">    return np.sign(project(x, alpha, suppData, suppLab, intercept, kernel))</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># kernel &#x3D; 1 # Gaussian kernel</span><br><span class="line">kernel &#x3D; 0 # Polynomial kernel </span><br><span class="line"># Here we can change the kernel function</span><br><span class="line"></span><br><span class="line">if kernel &#x3D;&#x3D; 1:</span><br><span class="line">    print(&quot;Temporarily using Gaussian Kernel...\n&quot;)</span><br><span class="line">else:</span><br><span class="line">    print(&quot;Temporarily using Polynomial Kernel...\n&quot;)</span><br><span class="line"></span><br><span class="line">alpha, suppData, suppLab, intercept &#x3D; SVM(x, y, kernel)</span><br><span class="line">y_predict &#x3D; predict(x, alpha, suppData, suppLab, intercept, kernel) # 计算所属class</span><br><span class="line"></span><br><span class="line"># predicted class&#x3D;1</span><br><span class="line">class1 &#x3D; []</span><br><span class="line">class2 &#x3D; []</span><br><span class="line">for i in range(0, len(y_predict)):</span><br><span class="line">    if y_predict[i] &gt; 0:</span><br><span class="line">        class1.append(x[i])</span><br><span class="line"># predicted class&#x3D;-1</span><br><span class="line">    else:</span><br><span class="line">        class2.append(x[i])</span><br><span class="line"></span><br><span class="line">x1 &#x3D; np.array(x1)</span><br><span class="line">x2 &#x3D; np.array(x2)</span><br><span class="line"></span><br><span class="line">plt.scatter(x1[:,0], x1[:,1], c&#x3D;&#39;r&#39;) # class &#x3D; 1</span><br><span class="line">plt.scatter(x2[:,0], x2[:,1], c&#x3D;&#39;b&#39;) # class &#x3D; -1</span><br><span class="line">plt.title(&quot;Original DataSet&quot;)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br><span class="line">class1 &#x3D; np.array(class1)</span><br><span class="line">class2 &#x3D; np.array(class2)</span><br><span class="line"></span><br><span class="line">plt.scatter(class1[:,0], class1[:,1], c&#x3D;&#39;black&#39;) # class &#x3D; 1</span><br><span class="line">plt.scatter(class2[:,0], class2[:,1], c&#x3D;&#39;green&#39;) # class &#x3D; -1</span><br><span class="line">plt.title(&quot;After SVM&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<h4 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Using Polynomial Kernel</th>
+<th>Using Gaussian Kernel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/img/SVM_2.png" alt=""></td>
+<td><img src="/img/SVM_2.png" alt=""></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="https://zqzhao.cn/2020/05/01/CSMATH-SVM/" title="SVM" target="_blank" rel="external">https://zqzhao.cn/2020/05/01/CSMATH-SVM/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/geekezhao" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/Avatar2.JPG" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/geekezhao" target="_blank"><span class="text-dark">Ziqi ZHAO</span><small class="ml-1x">Naive student.</small></a></h3>
+        <div>Nothing more.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/05/09/Seminar-WhatTheoryIsNot/" title="What Theory Is Not"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/04/29/AMR-content-analysis/" title="Content Analysis Methods"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
+  
+  
+  
+  <div class="bar-right">
+    
+  </div>
+  </div>
+</nav>
+  
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+	
+    <ul class="social-links">
+    	
+        <li><a href="https://github.com/geekezhao" target="_blank" title="Github" data-toggle=tooltip data-placement=top><i class="icon icon-github"></i></a></li>
+        
+    </ul>
+
+    <div class="copyright">
+    	
+        &copy; 2020 Geek ZHAO
+        
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+
+
+
+
+   
+    
+<script src="//cdn.jsdelivr.net/npm/gitment@0.0.3/dist/gitment.browser.min.js"></script>
+<script>
+var gitment = new Gitment({
+  // id默认为当前页面url，如果url后带参数或锚点，gitment要重新初始化
+  // https://github.com/imsun/gitment/issues/55
+  // 解决方案：id:window.location.pathname,或者将id设置为当前页面标题
+  id: 'SVM', 
+  owner: 'geekezhao', // 可以是你的GitHub用户名，也可以是github id
+  repo: '',
+  oauth: {
+    client_id: '',
+    client_secret: '',
+  }
+})
+gitment.render('comments')
+</script>
+
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<!-- <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>
