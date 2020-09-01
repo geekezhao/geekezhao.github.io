@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zqzhao.cn/"/>
-  <updated>2020-09-01T03:21:55.996Z</updated>
+  <updated>2020-09-01T03:24:00.254Z</updated>
   <id>https://zqzhao.cn/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>AMR-HLM</title>
+    <title>FE and RE and HLM</title>
     <link href="https://zqzhao.cn/2020/09/01/AMR-HLM/"/>
     <id>https://zqzhao.cn/2020/09/01/AMR-HLM/</id>
     <published>2020-09-01T03:18:57.000Z</published>
-    <updated>2020-09-01T03:21:55.996Z</updated>
+    <updated>2020-09-01T03:24:00.254Z</updated>
     
     <content type="html"><![CDATA[<h3 id="Fixed-Effect-vs-Random-Effect"><a href="#Fixed-Effect-vs-Random-Effect" class="headerlink" title="Fixed Effect vs. Random Effect"></a>Fixed Effect vs. Random Effect</h3><p><a href="https://zhuanlan.zhihu.com/p/60528092" target="_blank" rel="noopener">只求甚解：固定效应与随机效应</a></p><blockquote><p>真实世界的复杂现象 = 确定的统计模型 + 不确定的随机误差</p><p>写在前面：</p><p>原本只是为了了解HLM，但在HLM的介绍中介绍了随机效应和固定效应，为了厘清这两个概念找了相关资料，竟然意外中已经完成了对HLM的初步了解。但由于固定效应和随机效应是相对于某一种模型更为抽象、基本的概念，所以选用这一组概念作为入手点观察这一类统计方法。</p></blockquote><h4 id="What-is-the-Essence-of-Regression"><a href="#What-is-the-Essence-of-Regression" class="headerlink" title="What is the Essence of Regression ?"></a>What is the Essence of Regression ?</h4><p>下面的四幅图直观地展示了回归模型的“固定”与“随机”。同样都是一条回归方程（有几乎相同的截距和斜率，即模型的“固定部分”），但数据的实质却截然不同——①中的X和Y是两个正态分布的变量，其回归模型的“随机部分”基本都来自于随机误差，因此模型是适当的；②中的X和Y实则是非线性关系，因此用一般的线性回归做拟合是错误的，应加入X的二次项做多项式回归；③中的一个数据点成为了异常值（outlier），同样会影响回归模型的准确性，可以剔除该点，或者做稳健回归；④进一步告诉我们，哪怕是一个小小的异常数据点，也足以产生错误的、有误导性的结果。②~④的共性在于，<strong>残差并不满足正态分布，或者存在异方差（heteroscedasticity），所以它们得到的回归模型（固定部分）都是不妥当的</strong>。</p><p><img src="/img/FEvsRE2.jpg" alt=""></p><p>一般而言，<strong>回归模型的“随机部分”需要尽可能服从正态分布，这样才能保证“固定部分”的参数估计是无偏的、一致的、有效的</strong>。</p><p>“<strong>回归</strong>”的思想其实渗透着“<strong>舍得</strong>”的理念：我们通过舍弃那些“随机部分”的误差（residual variance），获得了我们想要的“固定部分”的参数（regression coefficients）。</p><h4 id="What-is-HLM"><a href="#What-is-HLM" class="headerlink" title="What is HLM ?"></a>What is HLM ?</h4><blockquote><p>t检验是ANOVA的一个特例（自变量只有两水平）<br>ANOVA是回归分析的一个特例（自变量为分类变量）<br>回归分析的实质是一般线性模型GLM（其推广则是广义线性模型）<br>GLM是HLM的一个特例（只有Level 1）<br>元分析可以视为只有组间模型的HLM（只有Level 2）  </p></blockquote><p>回归分析是几乎所有统计模型的基础，而回归分析的最一般形式则可以归为多层线性模型HLM。<br><strong>多层线性模型HLM : 总方差 = 组内方差（Level 1）+ 组间方差（Level 2）</strong></p><blockquote><p>以下举例：“智力水平（IQ）能否影响学业成绩（GPA）”<br>变量： 学生成绩，学生IQ，学校水平  </p></blockquote><p>在上面的例子中，学生是个体水平（Level 1）的分析单元，IQ和GPA都是在个体水平收集的变量，而学校是群体水平（Level 2）的分析单元，不过我们暂时并没有收集学校水平的任何自变量，只是把学校本身当做一个分组变量（clustering/grouping variable）。换句话说，上面这个例子也可用被称作“<strong>随机效应单因素协方差分析（ANCOVA with random effects）</strong>”。<br><img src="/img/FEvsRE3.jpg" alt=""></p><blockquote><p>注：上述模型在Level 1 层面仅考虑了学生个体差异；在Level 2 层面中考虑了学校差异，由于学校间的差异会影响截距，因此此时是随机截距，又因为GPA与IQ的关联是由学生在一开始决定的，此时又是固定斜率。  </p></blockquote><h4 id="Q：HLM是否在应用之出已经明确了模型的随机部分和固定部分，仅仅通过HLM确定各个系数？"><a href="#Q：HLM是否在应用之出已经明确了模型的随机部分和固定部分，仅仅通过HLM确定各个系数？" class="headerlink" title="Q：HLM是否在应用之出已经明确了模型的随机部分和固定部分，仅仅通过HLM确定各个系数？"></a><strong>Q：HLM是否在应用之出已经明确了模型的随机部分和固定部分，仅仅通过HLM确定各个系数？</strong></h4><p>我们还可以引入学校水平的自变量来对学校间的GPA均值差异进行解释，比如教师数量、教学经费……这些变量由于只在学校层面变化，对于每个学校内的每一个学生而言都只有一种可能的取值，因此必须放在Level 2的方程中作为群体水平自变量，而不能简单地处理为个体水平自变量——这也就是HLM的另一个存在的意义：<strong>可以同时纳入分析个体与群体水平的自变量</strong>。</p><blockquote><p>注：Level 1 和 Level 2 存在分层结构的关系（类似概念可见分层抽样和分层聚类）。此时自变量进入模型必须按照<strong>作用对象</strong>划分到对应的模型中。</p></blockquote><ul><li>“多层线性模型”与“分层/逐步多元回归” 的关系，请注意：<ul><li>多层线性模型HLM解决的是多层嵌套结构数据（落脚点是<strong>数据结构</strong>）</li><li>分层/逐步多元回归本身是普通的回归分析，解决的是不同自变量的重要性的优先程度（落脚点是<strong>变量重要性</strong>）</li></ul></li></ul><h4 id="HLM的自由度"><a href="#HLM的自由度" class="headerlink" title="HLM的自由度"></a>HLM的自由度</h4><p><a href="https://zhuanlan.zhihu.com/p/50048784" target="_blank" rel="noopener">只求甚解：HLM的自由度是个重要的问题吗？</a></p><p><a href="https://github.com/psychbruce/stats" target="_blank" rel="noopener">一些参考资料</a></p><h3 id="How-to-Decide"><a href="#How-to-Decide" class="headerlink" title="How to Decide ?"></a>How to Decide ?</h3><p><img src="/img/FEvsRE1.jpg" alt=""> </p>]]></content>
     
