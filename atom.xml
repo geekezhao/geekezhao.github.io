@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zqzhao.cn/"/>
-  <updated>2020-09-01T03:24:00.254Z</updated>
+  <updated>2020-10-18T06:54:34.825Z</updated>
   <id>https://zqzhao.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Difference in Bayes and Frequency</title>
+    <link href="https://zqzhao.cn/2020/10/18/Notes-Bayes-and-Frequency/"/>
+    <id>https://zqzhao.cn/2020/10/18/Notes-Bayes-and-Frequency/</id>
+    <published>2020-10-18T06:50:41.000Z</published>
+    <updated>2020-10-18T06:54:34.825Z</updated>
+    
+    <content type="html"><![CDATA[<p>The difference between Bayes and Frequency are mainly based on the order of observation. Frequency mathematicians want to record the fact faithfully while Bayes mathematicians want to update the known knowledge with new observation.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;The difference between Bayes and Frequency are mainly based on the order of observation. Frequency mathematicians want to record the fact
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Notes" scheme="https://zqzhao.cn/tags/Notes/"/>
+    
+  </entry>
   
   <entry>
     <title>FE and RE and HLM</title>
@@ -511,34 +535,6 @@ def p(x, mu, sigma):
     
     
       <category term="CS_Math" scheme="https://zqzhao.cn/tags/CS-Math/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Theory Related Collection</title>
-    <link href="https://zqzhao.cn/2019/09/20/Seminar-TheoryRelatedCollection/"/>
-    <id>https://zqzhao.cn/2019/09/20/Seminar-TheoryRelatedCollection/</id>
-    <published>2019-09-20T11:58:11.000Z</published>
-    <updated>2020-08-09T12:59:46.632Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li>1999  Rigor and RelevanceRevisited Response to Benbasat and Zmud.pdf  </li><li>1999, MISQ, Empirical Research inInformation Systems On the Relevance of Practice in Thinking of IS.pdf  </li><li>2003, Defining InterestingResearch Problems.pdf  </li><li>2003, The identity crisis withinthe IS discipline.pdf  </li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;ul&gt;
-&lt;li&gt;1999  Rigor and RelevanceRevisited Response to Benbasat and Zmud.pdf  &lt;/li&gt;
-&lt;li&gt;1999, MISQ, Empirical Research inInformation System
-      
-    
-    </summary>
-    
-    
-      <category term="Theory" scheme="https://zqzhao.cn/categories/Theory/"/>
-    
-    
-      <category term="Theorical_Basis" scheme="https://zqzhao.cn/tags/Theorical-Basis/"/>
     
   </entry>
   
