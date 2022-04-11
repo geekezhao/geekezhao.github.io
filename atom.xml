@@ -34,13 +34,20 @@
   </entry>
   
   <entry>
-    <title>Text Analysis</title>
-    <link href="https://zqzhao.cn/2022/04/10/Notes-TextAnalysis/"/>
-    <id>https://zqzhao.cn/2022/04/10/Notes-TextAnalysis/</id>
+    <title>Topic Modeling</title>
+    <link href="https://zqzhao.cn/2022/04/10/Notes-TopicModeling/"/>
+    <id>https://zqzhao.cn/2022/04/10/Notes-TopicModeling/</id>
     <published>2022-04-10T09:45:13.000Z</published>
-    <updated>2022-04-10T09:47:56.763Z</updated>
+    <updated>2022-04-11T15:15:17.372Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Text-Topic-Modeling"><a href="#Text-Topic-Modeling" class="headerlink" title="Text Topic Modeling"></a>Text Topic Modeling</h2><h2 id="Demographic-Info-Topic-Modeling"><a href="#Demographic-Info-Topic-Modeling" class="headerlink" title="Demographic Info Topic Modeling"></a>Demographic Info Topic Modeling</h2><p>Jiang, S., Qian, X., Shen, J., Fu, Y., &amp; Mei, T. (2015). <a href="/files/AuthorTopicModeling.pdf">Author topic model-based collaborative filtering for personalized POI recommendations</a>. IEEE transactions on multimedia, 17(6), 907-918.</p><p>Trusov, M., Ma, L., &amp; Jamal, Z. (2016). <a href="/files/CrumbOfTheCookie.pdf">Crumbs of the cookie: User profiling in customer-base analysis and behavioral targeting</a>. Marketing Science, 35(3), 405-426.</p>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Text-Topic-Modeling&quot;&gt;&lt;a href=&quot;#Text-Topic-Modeling&quot; class=&quot;headerlink&quot; title=&quot;Text Topic Modeling&quot;&gt;&lt;/a&gt;Text Topic Modeling&lt;/h2&gt;&lt;h2 i
+      
     
     </summary>
     
