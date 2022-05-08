@@ -47,9 +47,9 @@
     <link href="https://zqzhao.cn/2022/05/08/Notes-CausalInference/"/>
     <id>https://zqzhao.cn/2022/05/08/Notes-CausalInference/</id>
     <published>2022-05-08T13:55:56.000Z</published>
-    <updated>2022-05-08T16:03:03.506Z</updated>
+    <updated>2022-05-08T16:05:35.924Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="Related-Concepts"><a href="#Related-Concepts" class="headerlink" title="Related Concepts"></a>Related Concepts</h3><h4 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h4><p><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener">sklearn</a></p><p><a href="https://www.youtube.com/watch?v=fSytzGwwBVw" target="_blank" rel="noopener">YouTube</a></p><h4 id="Policy-Shock"><a href="#Policy-Shock" class="headerlink" title="Policy Shock"></a>Policy Shock</h4><h4 id="Heckman-Correction-Model"><a href="#Heckman-Correction-Model" class="headerlink" title="Heckman Correction Model"></a>Heckman Correction Model</h4>]]></content>
+    <content type="html"><![CDATA[<h3 id="Related-Concepts"><a href="#Related-Concepts" class="headerlink" title="Related Concepts"></a>Related Concepts</h3><h4 id="Cross-Validation"><a href="#Cross-Validation" class="headerlink" title="Cross Validation"></a>Cross Validation</h4><p><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener">sklearn</a></p><p><a href="https://www.youtube.com/watch?v=fSytzGwwBVw" target="_blank" rel="noopener">YouTube</a></p><p>这里主要是强调 N folded 的概念，也就是把样本 N 等分，每次选用 1/N 作为其中的 test set，其余作为 traning set.</p><h4 id="Policy-Shock"><a href="#Policy-Shock" class="headerlink" title="Policy Shock"></a>Policy Shock</h4><h4 id="Heckman-Correction-Model"><a href="#Heckman-Correction-Model" class="headerlink" title="Heckman Correction Model"></a>Heckman Correction Model</h4>]]></content>
     
     <summary type="html">
     
