@@ -18,15 +18,15 @@
   
   
   <title>Data Preprocessing | Hexo</title>
-  <meta name="description" content="Based on Jupyter Notebook import numpy as npimport pandas as pdimport Scikit-Learn as sklearnimport matplotlib.pyplot as plt data &#x3D; pd.read_csv(‘example.csv’, encoding&#x3D;’utf-8-sig’)   Data Overview  d">
+  <meta name="description" content="ref:Sample.py  Based on Jupyter Notebook import numpy as npimport pandas as pdimport Scikit-Learn as sklearnimport matplotlib.pyplot as plt data &#x3D; pd.read_csv(‘example.csv’, encoding&#x3D;’utf-8-sig’)   Da">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Data Preprocessing">
 <meta property="og:url" content="https://zqzhao.cn/2022/05/08/CSDN-datapreprocessing/index.html">
 <meta property="og:site_name" content="Geeke&#39;s Blog">
-<meta property="og:description" content="Based on Jupyter Notebook import numpy as npimport pandas as pdimport Scikit-Learn as sklearnimport matplotlib.pyplot as plt data &#x3D; pd.read_csv(‘example.csv’, encoding&#x3D;’utf-8-sig’)   Data Overview  d">
+<meta property="og:description" content="ref:Sample.py  Based on Jupyter Notebook import numpy as npimport pandas as pdimport Scikit-Learn as sklearnimport matplotlib.pyplot as plt data &#x3D; pd.read_csv(‘example.csv’, encoding&#x3D;’utf-8-sig’)   Da">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-08T12:48:45.000Z">
-<meta property="article:modified_time" content="2022-05-08T14:27:28.310Z">
+<meta property="article:modified_time" content="2022-05-09T08:21:44.244Z">
 <meta property="article:author" content="Geek ZHAO">
 <meta property="article:tag" content="DataMining">
 <meta name="twitter:card" content="summary">
@@ -343,7 +343,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2022/05/08/CSDN-datapreprocessing/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 168(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 181(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -353,7 +353,8 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <blockquote>
+        <p>ref:<br><a href="/files/courseworkLYT.py">Sample.py</a></p>
+<blockquote>
 <p>Based on Jupyter Notebook</p>
 <p>import numpy as np<br>import pandas as pd<br>import Scikit-Learn as sklearn<br>import matplotlib.pyplot as plt</p>
 <p>data = pd.read_csv(‘example.csv’, encoding=’utf-8-sig’)</p>
@@ -366,7 +367,7 @@
 </li>
 <li><p>Data Type and Null Value</p>
 <blockquote>
-<p>data.isnull().sum(axis = 0) # check missing value<br>data.dtypes # if object then missing OR discard the columns</p>
+<p>data.isnull().sum(axis = 0) # check missing value in sum<br>data.isnull().any() # check whether there is missing value<br>data.dtypes # if object then missing OR discard the columns</p>
 </blockquote>
 </li>
 <li><p>Anomaly Detection<br><a href="https://en.wikipedia.org/wiki/Anomaly_detection#Popular_techniques" target="_blank" rel="noopener">en.wikipedia.org</a></p>
