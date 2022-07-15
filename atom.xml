@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zqzhao.cn/"/>
-  <updated>2022-06-23T07:07:32.379Z</updated>
+  <updated>2022-07-15T06:57:12.541Z</updated>
   <id>https://zqzhao.cn/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSDN-ANOVA</title>
+    <link href="https://zqzhao.cn/2022/07/15/Notes-ANOVA/"/>
+    <id>https://zqzhao.cn/2022/07/15/Notes-ANOVA/</id>
+    <published>2022-07-15T06:03:51.000Z</published>
+    <updated>2022-07-15T06:57:12.541Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="How-to-apply-ANOVA-in-Python-and-R"><a href="#How-to-apply-ANOVA-in-Python-and-R" class="headerlink" title="How to apply ANOVA in Python and R?"></a>How to apply ANOVA in Python and R?</h3><ul><li><p>Python: <a href="https://www.statsmodels.org/devel/examples/notebooks/generated/interactions_anova.html#examples-notebooks-generated-interactions-anova--page-root" target="_blank" rel="noopener">www.statsmodels.org</a></p></li><li><p>R: See <a href="https://mikebyrnehfhci.wordpress.com/2014/06/13/translating-spss-to-r-non-orthogonal-or-unbalanced-factorial-between-subjects-anova/" target="_blank" rel="noopener">mikebyrnehfhci.wordpress.com</a></p></li></ul><h3 id="How-to-deal-with-non-orthogonal-Data"><a href="#How-to-deal-with-non-orthogonal-Data" class="headerlink" title="How to deal with non-orthogonal Data?"></a>How to deal with non-orthogonal Data?</h3><p>Non-orthogonal (or unbalanced) factorial between-subjects ANOVA. What that means is a two (or more) way ANOVA with one observation per subject where the number of subjects in each cell is not equal.</p><p>Ref: <a href="https://mikebyrnehfhci.wordpress.com/2014/06/13/translating-spss-to-r-non-orthogonal-or-unbalanced-factorial-between-subjects-anova/" target="_blank" rel="noopener">mikebyrnehfhci.wordpress.com</a></p><ul><li>R: </li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nonorth &lt;- read_excel(&quot;~&#x2F;Downloads&#x2F;nonorth.xls&quot;) </span><br><span class="line">View(nonorth)</span><br><span class="line"></span><br><span class="line">AF &#x3D; factor(nonorth$A)</span><br><span class="line">BF &#x3D; factor(nonorth$B)</span><br><span class="line"></span><br><span class="line">options(contrasts &#x3D; c(&quot;contr.sum&quot;,&quot;contr.poly&quot;))</span><br><span class="line">Anv &#x3D; aov(nonorth$Dep ~ AF * BF)</span><br><span class="line">Anova(Anv, type&#x3D;2)</span><br><span class="line">Anova(Anv, type&#x3D;3)</span><br></pre></td></tr></table></figure><ul><li>Python:  <ul><li>Using GLM to substitute OLS.  </li><li>Ref: <a href="https://www.southampton.ac.uk/~cpd/anovas/datasets/GLM.htm" target="_blank" rel="noopener">www.southampton.ac.uk</a>  </li><li>GLM is a generic term for parametric analyses of variance that can accommodate combinations of factors and covariates, and unbalanced and non-orthogonal designs. GLMs generally use an unrestricted model for analysing combinations of fixed and random factors.</li><li>Ref: <a href="https://stackoverflow.com/questions/27328623/anova-test-for-glm-in-python" target="_blank" rel="noopener">anova-test-for-glm-in-python</a></li><li>Ref2: some of their <a href="https://github.com/statsmodels/statsmodels/blob/main/statsmodels/stats/anova.py#L144" target="_blank" rel="noopener">ANOVA methods</a> do not even use the attribute ssr (which is the model’s sum of squared residuals, thus obviously undefined for a binomial GLM).</li></ul></li></ul><h3 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h3><p><a href="/files/Nonorthogonal.pdf">Slides</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;How-to-apply-ANOVA-in-Python-and-R&quot;&gt;&lt;a href=&quot;#How-to-apply-ANOVA-in-Python-and-R&quot; class=&quot;headerlink&quot; title=&quot;How to apply ANOVA in Py
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Stats" scheme="https://zqzhao.cn/tags/Stats/"/>
+    
+  </entry>
   
   <entry>
     <title>Notes-RelevanceTheory</title>
@@ -474,32 +498,6 @@
     <updated>2020-08-16T10:42:25.186Z</updated>
     
     <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="Theory" scheme="https://zqzhao.cn/categories/Theory/"/>
-    
-    
-      <category term="Article_Template_MIS" scheme="https://zqzhao.cn/tags/Article-Template-MIS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Article Template of MIS - Discussion</title>
-    <link href="https://zqzhao.cn/2020/08/08/module-discussion/"/>
-    <id>https://zqzhao.cn/2020/08/08/module-discussion/</id>
-    <published>2020-08-08T14:02:33.000Z</published>
-    <updated>2020-08-10T08:20:14.203Z</updated>
-    
-    <content type="html"><![CDATA[<p>In this part, I will formulate the template of discussion and future research part. Normally, this part includes implication for theory and implication for practice.</p><h4 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h4><h4 id="Limitation-and-Future-Research"><a href="#Limitation-and-Future-Research" class="headerlink" title="Limitation and Future Research"></a>Limitation and Future Research</h4><h4 id="Implication-for-Theory"><a href="#Implication-for-Theory" class="headerlink" title="Implication for Theory"></a>Implication for Theory</h4><h4 id="Implication-for-Practice"><a href="#Implication-for-Practice" class="headerlink" title="Implication for Practice"></a>Implication for Practice</h4><h4 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h4>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;In this part, I will formulate the template of discussion and future research part. Normally, this part includes implication for theory a
-      
     
     </summary>
     
